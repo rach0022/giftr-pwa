@@ -14,8 +14,35 @@
 <body>
     
 
+    
+    <!-- login field inputs will return token  -->
+    <div class="row">
+        <form id="login" class="col s12">
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">email</i>
+                    <input type="text" id="email" class="validate">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">security</i>
+                    <input type="text" id="password" class="validate">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" id="submit_login"type="submit">
+                <i class="material-icons">send</i>
+            </button>
+            <button class="btn waves-effect waves-light" id="get_login"type="submit">
+                <i class="material-icons">face</i>
+            </button>
+        </form>
+    </div>
+    
+        
     <!-- materialize js -->
     <script src="./js/materialize.min.js"></script>
-    <script src="./js/"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
