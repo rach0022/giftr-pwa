@@ -9,6 +9,7 @@
 - [ ] decide on a colour scheme (add class to body based on colour scheme)
 - [ ] decide on design practice (pubsub, seems like the best option so far)
 - [ ] create some base materialize templates to use
+- [ ] figure out form validation with materialize forms
 
 ### Templates/ Componenets to Decide on Based on Materialize:
 - [ ] Nav Bar when logged out (needs login, and signup form links)
