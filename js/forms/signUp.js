@@ -33,14 +33,39 @@ export const signUpForm = {
     //callback function to submit the form
     submitForm: ev =>{
         ev.preventDefault();
-        ev.stopPropagation();
+        // ev.stopPropagation();
+
+        let form = document.getElementById('signupForm');
+
+        let firstName = form.querySelector('#firstname-signup').value;
+        let lastName = form.querySelector('#lastname-signup').value;
+        let email = form.querySelector('#email-signup').value;
+        let password = form.querySelector('#password-signup').value;
+
+        let req = giftrRequests.send(
+            'POST', 
+            '/auth/users/', 
+            {
+                firstName, lastName, email, password
+            },
+            true,
+            false
+        );
+
+        if(req){
+            fetch(req)
+                .then(res =>res.json())
+                .then(data => console.log(data))
+                .catch(err => console.error(err));
+        }
+        signUpForm.closeInstance(form);
 
     },
 
     //callback function to cancel the form
     cancelForm: ev =>{
         ev.preventDefault();
-        ev.stopPropagation();
+        // ev.stopPropagation();
         
         let form = document.querySelector('#signupForm');
         form.querySelector('form').reset();
@@ -51,6 +76,6 @@ export const signUpForm = {
     //helper function to hide form
     closeInstance: inst =>{
         let instance = M.Sidenav.getInstance(inst);
-        inst.close();
+        instance.close();
     }
 };
