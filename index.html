@@ -31,14 +31,14 @@
                 <li><a href="#" data-target="loginForm" class="sidenav-trigger"><i class="material-icons prefix">account_circle</i> Login</a></li>
             </ul>
             <ul id="left" class="left">
-                <li><a href="#">Signup</a></li>
+                <li><a href="#" data-target="signupForm" class="sidenav-trigger">Signup</a></li>
             </ul>
         </div>
     </template>
 
     <!-- the template for the sigin form  (append to the body)-->
     <template id="loginFormTemplate">
-        <ul id="loginForm" class="sidenav right">
+        <ul id="loginForm" class="sidenav">
             <li><a class="subheader center">Sign In</a></li>
             <div class="row">
                 <form action="" class="col s12">
@@ -59,6 +59,49 @@
                     <div class="row center">
                         <a href="#" class="waves-effect waves-light btn s6" id="submit_login"><i class="material-icons">send</i>Submit</a>
                         <a href="#" class="waves-effect waves-light btn s6" id="cancel_login"><i class="material-icons">cancel</i> Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </ul>
+    </template>
+    
+    <!-- signup form template  -->
+    <template id="signupFormTemplate">
+        <ul id="signupForm" class="sidenav">
+            <li><a class="subheader">Sign Up</a></li>
+            <div class="row">
+                <form action="" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix"></i>
+                            <input type="text" id="firstname-signup" class="validate">
+                            <label for="firstname-signup">First Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix"></i>
+                            <input type="text" id="lastname-signup" class="validate">
+                            <label for="lastname-signup">Last Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix"></i>
+                            <input type="text" id="email-signup" class="validate">
+                            <label for="email-signup">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix"></i>
+                            <input type="password" id="password-signup" class="validate">
+                            <label for="password-signup">Password</label>
+                        </div>
+                    </div>
+                    <div class="row center">
+                        <a href="#" class="waves-effect waves-light btn s6" id="submit_signup"><i class="material-icons">send</i>Submit</a>
+                        <a href="#" class="waves-effect waves-light btn s6" id="cancel_signup"><i class="material-icons">cancel</i> Cancel</a>
                     </div>
                 </form>
             </div>

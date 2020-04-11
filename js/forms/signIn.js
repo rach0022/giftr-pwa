@@ -22,7 +22,7 @@ export const signInForm = {
         //render in the container
         container.appendChild(form);
 
-        //instantiate the materialize events for side navs
+        //instantiate the materialize events for side navs (taken from materialize docs)
         let instances = document.querySelectorAll('#loginForm');
         M.Sidenav.init(instances, {edge: "right"});
 
@@ -67,6 +67,7 @@ export const signInForm = {
 
     //callback function to cancel the login
     cancelLogin: ev =>{
+        ev.preventDefault();
         let form = document.getElementById('loginForm');
         form.querySelector('form').reset();
         //get the instace of the form from Materialize:
