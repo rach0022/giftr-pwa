@@ -22,3 +22,6 @@
 - [ ] Form for change password (needs new password) buttons: submit, cancel
 - [ ] Forms are side navs that can get pulled out, possibly done as a template to render them using pub sub methodology
 - [ ] forms for add person or gift, should slide down from under and be shown once a user clicks a button 
+
+### Reminders: 
+- Make sure to init side navs for right and left side seperately. maybe just init inside each seperate module

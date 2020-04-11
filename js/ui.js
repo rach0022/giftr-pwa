@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var autocompleteElements = document.querySelectorAll('.autocomplete');
     var instances = M.Autocomplete.init(autocompleteElements, opts);
 
-    let sideNavs = document.querySelectorAll('.sidenav');
-    var sidenavInit = M.Sidenav.init(sideNavs, {edge: "left"});
+    // let rightSideNavs = document.querySelectorAll('.sidenav.right');
+    // M.Sidenav.init(rightSideNavs, {edge: "right"});
+
+    // let leftSideNavs = document.querySelectorAll('.sidenav.left');
+    // M.Sidenav.init(leftSideNavs, {edge: "left"});
 });
