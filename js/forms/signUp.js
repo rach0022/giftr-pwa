@@ -8,7 +8,7 @@
 *
 ***********************/
 import {giftrRequests} from '../requests.js';
-import { signInForm } from './signIn.js';
+// import { signInForm } from './signIn.js';
 
 export const signUpForm = {
     render: container =>{
@@ -69,7 +69,7 @@ export const signUpForm = {
         
         let form = document.querySelector('#signupForm');
         form.querySelector('form').reset();
-        signInForm.closeInstance(form);
+        signUpForm.closeInstance(form);
         
     },
 
