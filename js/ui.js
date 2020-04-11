@@ -1,4 +1,12 @@
-//use this file to instantiate any materialize js functionality needed for app
+/*************************
+*
+*  @description use this file to instantiate any materialize js functionality needed
+*
+*  @author Ravi Chandra Rachamalla rach0022@algonquinlive.com
+*
+*  @version Apr 11, 2020
+*
+***********************/
 
 let opts = {
     data: {},

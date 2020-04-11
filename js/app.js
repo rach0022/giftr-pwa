@@ -1,4 +1,17 @@
-giftr = {
+/*************************
+*
+*  @description This is the Main part of this JS module that will build/ display the interface
+*
+*  @author Ravi Chandra Rachamalla rach0022@algonquinlive.com
+*
+*  @version Apr 11, 2020
+*
+***********************/
+
+import {pubsub} from './pubsub.js';
+import {giftrRequests} from './requests.js';
+
+let giftr = {
     // baseURL: 'http://localhost:3030',
     // baseURL: 'EC2Co-EcsEl-1AH0Z1LDB9VES-797724042.us-east-1.elb.amazonaws.com',
     baseURL: 'https://giftr.mad9124.rocks',
