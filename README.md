@@ -12,7 +12,7 @@
 - [ ] figure out form validation with materialize forms
 
 ### Templates/ Componenets to Decide on Based on Materialize:
-- [ ] Nav Bar when logged out (needs login, and signup form links)
+- [ ] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
 - [ ] Nav Bar when logged in (needs logout and user side nav link)
 - [ ] User side nav is a button that gets clicked to pull out a side nav that shows info from GET /auth/users/me 
 - [ ] Card template for people in GET /api/people 
@@ -21,3 +21,4 @@
 - [ ] Form for login (needs email, password) buttons: submit, cancel
 - [ ] Form for change password (needs new password) buttons: submit, cancel
 - [ ] Forms are side navs that can get pulled out, possibly done as a template to render them using pub sub methodology
+- [ ] forms for add person or gift, should slide down from under and be shown once a user clicks a button 

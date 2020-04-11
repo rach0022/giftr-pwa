@@ -10,10 +10,14 @@
 
 import {pubsub} from './pubsub.js';
 import {giftrRequests} from './requests.js';
+import {nav} from './nav.js';
 
 let giftr = {
     init: ev => {
         giftr.testAPI();
+
+        //render all the initial containers
+        nav.render(document.querySelector('nav'));
     },
     testAPI: (method, url, body) =>{
         //test the log in method see if we get back a token to put in session storage

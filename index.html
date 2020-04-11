@@ -13,33 +13,37 @@
 </head>
 <body>
 
+    <nav>
+        <!-- the container for the naviagtion -->
+    </nav>
+
     <!-- side nav content testing  -->
     <ul id="slide-out" class="sidenav">
         <li><a class="subheader">Sign In</a></li>
         <li>
             <!-- login field inputs will return token  -->
-    <div class="row">
-        <form id="login" class="row s12">
-            <div class="column">
-                <div class="input-field row s3">
-                    <i class="material-icons prefix">email</i>
-                    <input type="text" id="email" class="validate">
-                    <label for="email">Email</label>
-                </div>
-                <div class="input-field row s6">
-                    <i class="material-icons prefix">security</i>
-                    <input type="text" id="password" class="validate">
-                    <label for="password">Password</label>
-                </div>
+            <div class="row">
+                <form id="login" class="row s12">
+                    <div class="column">
+                        <div class="input-field row s3">
+                            <i class="material-icons prefix">email</i>
+                            <input type="text" id="email" class="validate">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="input-field row s6">
+                            <i class="material-icons prefix">security</i>
+                            <input type="text" id="password" class="validate">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <button class="btn waves-effect waves-light" id="submit_login"type="submit">
+                        <i class="material-icons">send</i>
+                    </button>
+                    <button class="btn waves-effect waves-light" id="get_login"type="submit">
+                        <i class="material-icons">face</i>
+                    </button>
+                </form>
             </div>
-            <button class="btn waves-effect waves-light" id="submit_login"type="submit">
-                <i class="material-icons">send</i>
-            </button>
-            <button class="btn waves-effect waves-light" id="get_login"type="submit">
-                <i class="material-icons">face</i>
-            </button>
-        </form>
-    </div>
         </li>
       </ul>
       <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -49,5 +53,19 @@
     <script src="./js/materialize.min.js"></script>
     <script src="./js/ui.js"></script>
     <script type="module" src="./js/app.js"></script>
+
+    <!-- start of template definitions -->
+    <!-- the template for the header navigation  -->
+    <template id="navNotAuthenticated">
+        <div class="nav-wrapper">
+            <a href="" class="brand-logo center">GIFTR</a>
+            <ul id="rightNav" class="right">
+                <li><a href="#">Login</a></li>
+            </ul>
+            <ul id="left" class="left">
+                <li><a href="#">Signup</a></li>
+            </ul>
+        </div>
+    </template>
 </body>
 </html>
