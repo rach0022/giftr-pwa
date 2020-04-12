@@ -26,11 +26,14 @@
     <template id="navNotAuthenticated">
         <div class="nav-wrapper">
             <a href="" class="brand-logo center">GIFTR</a>
-            <ul id="rightNav" class="right">
-                <li><a href="#" data-target="loginForm" class="sidenav-trigger"><i class="material-icons prefix">account_circle</i> Login</a></li>
+            <ul id="loginNav" class="right">
+                <li><a href="#" data-target="loginForm" class="sidenav-trigger"><i class="material-icons prefix">account_circle</i>Login</a></li>
             </ul>
-            <ul id="left" class="left">
+            <ul id="signupNav" class="left">
                 <li><a href="#" data-target="signupForm" class="sidenav-trigger">Signup</a></li>
+            </ul>
+            <ul id="profileSlideout" class="right hide">
+                <li><a href="#" data-target="userData" class="sidenav-trigger">Profile</a></li>
             </ul>
         </div>
     </template>
@@ -116,11 +119,14 @@
 
     <!-- card template  (could be for person list or gift list)-->
     <template id="cardTemplate">
-        <div class="card horizontal">
+        <div class="card horizontal col s6 offset-s3">
             <div class="card-stacked">
-                <div class="card-content"></div>
+                <div class="card-content center"></div>
                 <div class="card-action">
-                    <a href="#"></a>
+                    <div class="row center">
+                        <a href="#" class="waves-effect waves-light btn s6"><i class="material-icons">redeem</i></a>
+                        <a href="#" class="waves-effect waves-light btn s6"><i class="material-icons">remove</i></a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -33,6 +33,15 @@ export const nav = {
 
     //loginStatus will change the isUserAuth to true or false, whatever the data given
     loginStatus: isAuth =>{
-        nav.isUserAuth = isAuth; 
+        nav.isUserAuth = isAuth;
+        if(isAuth){ //user is logged in
+            document.getElementById('profileSlideout').classList.remove('hide');
+            document.getElementById('loginNav').classList.add('hide');
+            document.getElementById('signupNav').classList.add('hide');
+        } else {
+            document.getElementById('profileSlideout').classList.add('hide');
+            document.getElementById('loginNav').classList.remove('hide');
+            document.getElementById('signupNav').classList.remove('hide');
+        }
     }
 };
