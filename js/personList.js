@@ -94,6 +94,7 @@ export const personList = {
             //set the content and attributes for the card
             card.querySelector('.card').setAttribute('data-personid', person._id);
             card.querySelector('.card-content').textContent = person.name + '\n' + person.birthDate +  '\n' + person.gifts;
+            card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
 
             //set the event listeners for the buttons (show person/ delete)
             card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
@@ -115,5 +116,22 @@ export const personList = {
     //callback function to delete the selected person
     deletePerson: ev =>{
         ev.preventDefault();
+        let id = ev.target.getAttribute('data-personid'); //get the id from the button
+        // console.log();
+        let req = giftrRequests.send('DELETE', `/api/people/${id}`, null, false, true);
+
+        fetch(req)
+            .then(res => res.json())
+            .then(data => {
+                if(data.errors){
+                    console.log('errors', data);
+                }
+                if(data.data){
+                    console.log(data);
+                    M.toast({html:'person deleted'});
+                    pubsub.publish('loginStatus', true);
+                }
+            })
+            .catch(err => console.error(err));
     }
 }
