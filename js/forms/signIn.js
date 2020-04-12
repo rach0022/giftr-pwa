@@ -8,6 +8,7 @@
 *
 ***********************/
 import {giftrRequests} from '../requests.js';
+import { pubsub } from '../pubsub.js';
 
 export const signInForm = {
     render: container => {
@@ -42,19 +43,26 @@ export const signInForm = {
             fetch(req)
                 .then(res => res.json())
                 .then(res => {
+                    signInForm.closeInstance(form);
                     console.log(res);
                     if (res.errors){
-                        console.log("This is the error", res.errors[0]);
+                        console.log("There was an error signing in");
+                        M.toast({html: 'signin failed'});
+
                     }
-                    const data = res; 
-                    if(data.data.token){
-                        console.log(data.data.token);
-                        sessionStorage.setItem('GIFTR-UserToken', 'Bearer ' +  data.data.token);
+                    if(res.data.token){
+                        console.log(res.data.token);
+                        M.toast({html: 'signin success'});
+                        sessionStorage.setItem('GIFTR-UserToken', 'Bearer ' +  res.data.token);
+
+                        //publish the events that we are logged in
+                        pubsub.publish('loginStatus', true);
                     }
                 })
                 .catch(err => {
                     // console.error(err)
-                    console.log("This is the error", err.errors);
+                    // M.toast({html : 'fatal error'})
+                    console.log("This is the error", err);
             });
         }
         //reset the form

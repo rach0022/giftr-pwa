@@ -25,3 +25,4 @@
 
 ### Reminders: 
 - Make sure to init side navs for right and left side seperately. maybe just init inside each seperate module
+- MAke sure to use Toasts (M.toast({html: info})) for user alerts

@@ -55,11 +55,23 @@ export const signUpForm = {
         if(req){
             fetch(req)
                 .then(res =>res.json())
-                .then(data => console.log(data))
-                .catch(err => console.error(err));
-        }
-        signUpForm.closeInstance(form);
+                .then(data => {
+                    signUpForm.closeInstance(form);
+                    console.log(data)
+                    if(data.errors){
+                        console.log('there was an error signing up');
+                        M.toast({html: 'signup failed'});
 
+                    }
+                    if(data.data){
+                        M.toast({html: 'signup success'});
+                    }
+                })
+                .catch(err => {
+                    M.toast({html: 'fatal error'});
+                    console.error('this is the error', err);
+                });
+        }
     },
 
     //callback function to cancel the form

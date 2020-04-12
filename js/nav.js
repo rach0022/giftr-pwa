@@ -33,6 +33,6 @@ export const nav = {
 
     //loginStatus will change the isUserAuth to true or false, whatever the data given
     loginStatus: isAuth =>{
-        isUserAuth = isAuth; 
+        nav.isUserAuth = isAuth; 
     }
 };

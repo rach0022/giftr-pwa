@@ -9,20 +9,42 @@
 ***********************/
 
 import {giftrRequests} from './requests.js';
+import { pubsub } from './pubsub.js';
 
 export const personList = {
 
     //render the person list in whatever contaienr sepecified
     render: container =>{
-        //get the template
+        //get/clone the template
+        let template = document.getElementById('personListTemplate');
+        let ul = template.content.cloneNode(true);
 
         //attach all the events needed
 
         //render in the container
+        container.appendChild(ul);
 
-        //instante whatever materialie events needed
+        //instantiate whatever materialize events needed
+
 
         //subscribe to any pubsub events needed
+        pubsub.subscribe('loginStatus', personList.loginStatus);
+    },
+
+    //view for the user not logged in
+    loginStatus: isAuth =>{
+        let list = document.getElementById('personList');
+        if(isAuth){
+            //user is logged in, fetch from GET /api/people to get their list of people
+            let template = document.getElementById('personCardTemplate');
+            list.innerHTML = ""; //clear out the list before we add all the people
+        } else {
+            let userMessage = document.createElement('p');
+            userMessage.classList.add('flow-text', 'center');
+            userMessage.textContent = 'User is not logged in, please log in to access our full app';
+            list.innerHTML = "";
+            list.appendChild(userMessage);
+        }
     },
 
     //make a fetch to GET /api/people

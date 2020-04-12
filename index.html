@@ -13,9 +13,8 @@
 </head>
 <body>
 
-    <nav>
-        <!-- the container for the naviagtion -->
-    </nav>
+    <nav></nav>
+    <main></main>
         
     <!-- materialize js -->
     <script src="./js/materialize.min.js"></script>
@@ -107,6 +106,27 @@
             </div>
         </ul>
     </template>
+
+    <!-- template for person list rendered in main -->
+    <template id="personListTemplate">
+        <div  id="personList" class="row">
+            <h3>User is not logged in, please log in to access our full app</h3>
+        </div>
+    </template>
+
+    <!-- card template  (could be for person list or gift list)-->
+    <template id="cardTemplate">
+        <div class="card horizontal">
+            <div class="card-stacked">
+                <div class="card-content"></div>
+                <div class="card-action">
+                    <a href="#"></a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
 
 </body>
 </html>
