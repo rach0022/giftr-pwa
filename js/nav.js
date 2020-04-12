@@ -110,5 +110,8 @@ export const nav = {
         //close the form
         let instance = M.Sidenav.getInstance(document.getElementById('profileSlideout'));
         instance.close();
+
+        //tell the user
+        M.toast({html: 'logged out'})
     }
 };
