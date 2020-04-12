@@ -13,13 +13,13 @@
 - [ ] make sure nav bar changes when the person is logged in
 
 ### Templates/ Componenets to Decide on Based on Materialize:
-- [ ] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
-- [ ] Nav Bar when logged in (needs logout and user side nav link)
-- [ ] User side nav is a button that gets clicked to pull out a side nav that shows info from GET /auth/users/me 
-- [ ] Card template for people in GET /api/people 
+- [x] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
+- [x] Nav Bar when logged in (needs logout and user side nav link)
+- [x] User side nav is a button that gets clicked to pull out a side nav that shows info from GET /auth/users/me 
+- [x] Card template for people in GET /api/people 
 - [ ] Card template for gift list from GET /api/people/:personId/gifts
-- [ ] Form for signup (needs lastName, firstName, email, password) buttons: cancel, submit
-- [ ] Form for login (needs email, password) buttons: submit, cancel
+- [x] Form for signup (needs lastName, firstName, email, password) buttons: cancel, submit
+- [x] Form for login (needs email, password) buttons: submit, cancel
 - [ ] Form for change password (needs new password) buttons: submit, cancel
 - [ ] Forms are side navs that can get pulled out, possibly done as a template to render them using pub sub methodology
 - [ ] forms for add person or gift, should slide down from under and be shown once a user clicks a button 
