@@ -13,6 +13,7 @@
 //will render based on templates in the main app.js part of the module
 
 import {pubsub} from './pubsub.js';
+import {giftrRequests} from './requests.js';
 
 export const nav = {
     //loginStatus will have true or false if logged in and will be defaulted to false when app loads
@@ -20,13 +21,27 @@ export const nav = {
 
     //will render the naviagtion in the main html documents
     render: container => {
-        let template = document.getElementById('navNotAuthenticated');
+        let template = document.getElementById('mainNavigation');
         let mainNav = template.content.cloneNode(true); //get a copy of the main navigation
 
-        //add all the events I want to for login and signup buttons
+        //clone the side template
+        let sideTemplate = document.getElementById('profileTemplate');
+        let sidenav = sideTemplate.content.cloneNode(true);
+
+        //add all the events I want to for profile buttons
+        mainNav.getElementById('profileNav').addEventListener('click', nav.getProfile);
+        sidenav.getElementById('signout').addEventListener('click', nav.signout);
 
         //now append the mainNav to the container
         container.appendChild(mainNav);
+        container.appendChild(sidenav);
+
+        //init the materialize side nav for the profile
+        let instances = document.querySelectorAll('#profileSlideout');
+        M.Sidenav.init(instances, {edge: "right"});
+
+        
+
         //subscribe to any events we want to listen to like the log in events:
         pubsub.subscribe('loginStatus', nav.loginStatus);
     },
@@ -35,13 +50,65 @@ export const nav = {
     loginStatus: isAuth =>{
         nav.isUserAuth = isAuth;
         if(isAuth){ //user is logged in
-            document.getElementById('profileSlideout').classList.remove('hide');
+            document.getElementById('profileNav').classList.remove('hide');
             document.getElementById('loginNav').classList.add('hide');
             document.getElementById('signupNav').classList.add('hide');
         } else {
-            document.getElementById('profileSlideout').classList.add('hide');
+            document.getElementById('profileNav').classList.add('hide');
             document.getElementById('loginNav').classList.remove('hide');
             document.getElementById('signupNav').classList.remove('hide');
         }
+    },
+
+    //callback function to get the profile data of the user
+    getProfile: ev =>{
+        let req = giftrRequests.send('GET', '/auth/users/me/', null, false, true);
+
+        fetch(req)
+            .then(res => res.json())
+            .then(data => {
+                if(data.errors){
+                    console.error('error fetching profile info', data.error);
+                    M.toast({html: 'error fetching profile info'});
+                }
+                if(data.data){
+                    return data.data
+                }
+            })
+            .then(profile =>{
+                nav.buildProfileNav(profile);
+                console.log(profile);
+            })
+            .catch(err =>{
+                console.error(err);
+                M.toast({html:'fatal error fetching profile info'});
+            })
+    },
+
+    //helper function to render the navigation
+    buildProfileNav: profile =>{
+
+        let sidenav = document.querySelector('#profileSlideout');
+        console.log(sidenav);
+        //set the appropriate text content
+        sidenav.querySelector('.lname').textContent = 'first: ' +  profile.lastName;
+        sidenav.querySelector('.fname').textContent = 'last: ' + profile.firstName;
+        sidenav.querySelector('.email').textContent = 'email: ' + profile.email;
+
+        //init materialize js fucntionality
+    },
+
+    signout: ev =>{
+        ev.preventDefault();
+
+        //clear out the item in session storage
+        sessionStorage.removeItem('GIFTR-UserToken');
+
+        //tell the other modules we signed out
+        pubsub.publish('loginStatus', false);
+
+        //close the form
+        let instance = M.Sidenav.getInstance(document.getElementById('profileSlideout'));
+        instance.close();
     }
 };

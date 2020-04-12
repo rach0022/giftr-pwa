@@ -23,7 +23,7 @@
 
     <!-- start of template definitions -->
     <!-- the template for the header navigation  -->
-    <template id="navNotAuthenticated">
+    <template id="mainNavigation">
         <div class="nav-wrapper">
             <a href="" class="brand-logo center">GIFTR</a>
             <ul id="loginNav" class="right">
@@ -32,8 +32,8 @@
             <ul id="signupNav" class="left">
                 <li><a href="#" data-target="signupForm" class="sidenav-trigger">Signup</a></li>
             </ul>
-            <ul id="profileSlideout" class="right hide">
-                <li><a href="#" data-target="userData" class="sidenav-trigger">Profile</a></li>
+            <ul id="profileNav" class="right hide">
+                <li><a href="#" data-target="profileSlideout" class="sidenav-trigger">Profile</a></li>
             </ul>
         </div>
     </template>
@@ -110,6 +110,19 @@
         </ul>
     </template>
 
+    <!-- template for profile side nav -->
+    <template id="profileTemplate">
+        <ul id="profileSlideout" class="sidenav">
+            <div class="row">
+                <li><a href="#" class="subheader center">Your Profile</a></li>
+                <li><a href="#" class="subheader fname">First Name: </a></li>
+                <li><a href="#" class="subheader lname">Last Name: </a></li>
+                <li><a href="#" class="subheader email">Email: /a></li>
+                <li><a href="#" id="signout" class="waves-effect eaves-light btn col s10 offset-s1">Sign Out</a></li>
+            </div>
+        </ul>
+    </template>
+
     <!-- template for person list rendered in main -->
     <template id="personListTemplate">
         <div  id="personList" class="row">
@@ -136,3 +149,19 @@
 
 </body>
 </html>
+
+<!-- uncommented ideas:  -->
+<!-- <li><div class="divider"></div></li>
+                <li><a href="#" class="subheader center">Change Password</a></li>
+                <li><div class="divider"></div></li>
+                
+                <div class="row">
+                    <form action="">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">security</i>
+                            <input type="text" id="password-change" class="validate">
+                            <label for="password-change">Password</label>
+                        </div>
+                    </form>
+                </div> 
+-->

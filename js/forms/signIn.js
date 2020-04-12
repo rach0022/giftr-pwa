@@ -84,6 +84,6 @@ export const signInForm = {
 
     closeInstance: inst =>{
         let instance = M.Sidenav.getInstance(inst);
-        instance.close()
+        instance.close();
     }
 };
