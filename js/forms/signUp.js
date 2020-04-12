@@ -8,7 +8,7 @@
 *
 ***********************/
 import {giftrRequests} from '../requests.js';
-// import { signInForm } from './signIn.js';
+import { ui } from '../ui.js';
 
 export const signUpForm = {
     render: container =>{
@@ -24,8 +24,7 @@ export const signUpForm = {
         container.appendChild(form);
 
         //instantiate in the container
-        let instances = document.querySelectorAll('#signupForm');
-        M.Sidenav.init(instances, {edge: 'left'});
+        ui.initSidenav('signupForm', 'left')
 
         //subscribe to any pubsub events needed
     },
@@ -56,7 +55,7 @@ export const signUpForm = {
             fetch(req)
                 .then(res =>res.json())
                 .then(data => {
-                    signUpForm.closeInstance(form);
+                    ui.closeSidenav(form);
                     console.log(data)
                     if(data.errors){
                         console.log('there was an error signing up');
@@ -81,14 +80,7 @@ export const signUpForm = {
         
         let form = document.querySelector('#signupForm');
         form.querySelector('form').reset();
-        signUpForm.closeInstance(form);
+        ui.closeSidenav(form);
         
-    },
-
-    //helper function to hide form
-    closeInstance: inst =>{
-        let instance = M.Sidenav.getInstance(inst);
-        instance.close();
-        // inst.reset();
     }
 };

@@ -38,6 +38,7 @@ export const personList = {
             //user is logged in, fetch from GET /api/people to get their list of people
             // let template = document.getElementById('personCardTemplate');
             list.innerHTML = ""; //clear out the list before we add all the people
+            document.getElementById('addPerson').classList.remove('hide'); //show the add button
 
             //now create the request and fetch GET /api/people
             let req = giftrRequests.send('GET', '/api/people/', null, false, true);
@@ -50,6 +51,7 @@ export const personList = {
             userMessage.classList.add('flow-text', 'center');
             userMessage.textContent = 'User is not logged in, please log in to access our full app';
             list.innerHTML = "";
+            document.getElementById('addPerson').classList.add('hide'); //hide the add button
             list.appendChild(userMessage);
         }
     },
@@ -94,6 +96,8 @@ export const personList = {
             card.querySelector('.card-content').textContent = person.name + '\n' + person.birthDate +  '\n' + person.gifts;
 
             //set the event listeners for the buttons (show person/ delete)
+            card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
+            card.querySelector('.deletePerson').addEventListener('click', personList.deletePerson);
 
             //append the card to the ul
             frag.appendChild(card);
@@ -101,5 +105,15 @@ export const personList = {
 
         document.getElementById('personList').appendChild(frag);
 
+    },
+
+    //callback function to bind to show gifts button on person card
+    showGifts: ev =>{
+        ev.preventDefault();
+    },
+
+    //callback function to delete the selected person
+    deletePerson: ev =>{
+        ev.preventDefault();
     }
 }

@@ -18,7 +18,7 @@
         
     <!-- materialize js -->
     <script src="./js/materialize.min.js"></script>
-    <script src="./js/ui.js"></script>
+    <!-- <script src="./js/ui.js"></script> -->
     <script type="module" src="./js/app.js"></script>
 
     <!-- start of template definitions -->
@@ -47,7 +47,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input type="text" id="email-login" class="validate">
+                            <input type="email" id="email-login" class="validate">
                             <label for="email-login">Email</label>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="material-icons prefix">email</i>
-                            <input type="text" id="email-signup" class="validate">
+                            <input type="email" id="email-signup" class="validate">
                             <label for="email-signup">Email</label>
                         </div>
                     </div>
@@ -105,6 +105,33 @@
                         <a href="#" class="waves-effect waves-light btn s6" id="submit_signup"><i class="material-icons">send</i>Submit</a>
                         <a href="#" class="waves-effect waves-light btn s6" id="cancel_signup"><i class="material-icons">cancel</i> Cancel</a>
                     </div>
+                </form>
+            </div>
+        </ul>
+    </template>
+
+    <!-- template for add person form  -->
+    <template id="addPersonTemplate">
+        <ul id="addPersonForm" class="sidenav">
+            <li><a href="#" class="subheader center">Add Person</a></li>
+            <div class="row">
+                <form action="" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">face</i>
+                            <input type="text" id="fullname-person">
+                            <label for="fullname-person">Full Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">cake</i>
+                            <input type="date" id="birthdate-person">
+                            <label for="birthdate-person"></label>
+                        </div>
+                    </div>
+                    <a href="#" class="waves-effect waves-light btn s6" id="submit_person"><i class="material-icons">add</i></a>
+                    <a href="#" class="waves-effect waves-light btn s6" id="cancel_person"><i class="material-icons">remove</i></a>
                 </form>
             </div>
         </ul>
@@ -128,6 +155,11 @@
         <div  id="personList" class="row">
             <h3>User is not logged in, please log in to access our full app</h3>
         </div>
+        <div class="fixed-action-btn hide" id="addPerson">
+            <a href="#" class="btn-floating btn-large green sidenav-trigger" data-target="addPersonForm">
+                <i class="large material-icons">add</i>
+            </a>
+        </div>
     </template>
 
     <!-- card template  (could be for person list or gift list)-->
@@ -137,8 +169,8 @@
                 <div class="card-content center"></div>
                 <div class="card-action">
                     <div class="row center">
-                        <a href="#" class="waves-effect waves-light btn s6"><i class="material-icons">redeem</i></a>
-                        <a href="#" class="waves-effect waves-light btn s6"><i class="material-icons">remove</i></a>
+                        <a href="#" class="waves-effect waves-light btn s6 showGifts"><i class="material-icons">redeem</i></a>
+                        <a href="#" class="waves-effect waves-light btn s6 deletePerson"><i class="material-icons">remove</i></a>
                     </div>
                 </div>
             </div>

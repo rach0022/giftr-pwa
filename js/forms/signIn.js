@@ -9,6 +9,7 @@
 ***********************/
 import {giftrRequests} from '../requests.js';
 import { pubsub } from '../pubsub.js';
+import {ui} from '../ui.js';
 
 export const signInForm = {
     render: container => {
@@ -24,8 +25,9 @@ export const signInForm = {
         container.appendChild(form);
 
         //instantiate the materialize events for side navs (taken from materialize docs)
-        let instances = document.querySelectorAll('#loginForm');
-        M.Sidenav.init(instances, {edge: "right"});
+        // let instances = document.querySelectorAll('#loginForm');
+        // M.Sidenav.init(instances, {edge: "right"});
+        ui.initSidenav('loginForm', 'right');
 
         //subscribe to any pubsub events needed
     },
@@ -43,7 +45,7 @@ export const signInForm = {
             fetch(req)
                 .then(res => res.json())
                 .then(res => {
-                    signInForm.closeInstance(form);
+                    ui.closeSidenav(form);
                     console.log(res);
                     if (res.errors){
                         console.log("There was an error signing in");
@@ -77,12 +79,6 @@ export const signInForm = {
         let form = document.getElementById('loginForm');
         form.querySelector('form').reset();
         //get the instace of the form from Materialize:
-        signInForm.closeInstance(form);
-    },
-
-    closeInstance: inst =>{
-        let instance = M.Sidenav.getInstance(inst);
-        instance.close();
-        // inst.reset();
+        ui.closeSidenav(form);
     }
 };

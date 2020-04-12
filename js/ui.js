@@ -7,19 +7,19 @@
 *  @version Apr 11, 2020
 *
 ***********************/
+export const ui = {
 
-let opts = {
-    data: {},
-    limit: "2"
-}
+    //initsidenav is a helper function will take in the element id of the sidenav and the edge it comes from
+    //and will init the sidenav
+    initSidenav: (elementID, edge) =>{
+        let instances = document.querySelector(`#${elementID}`);
+        M.Sidenav.init(instances, {edge})
+    },
 
-document.addEventListener('DOMContentLoaded', function() {
-    var autocompleteElements = document.querySelectorAll('.autocomplete');
-    var instances = M.Autocomplete.init(autocompleteElements, opts);
-
-    // let rightSideNavs = document.querySelectorAll('.sidenav.right');
-    // M.Sidenav.init(rightSideNavs, {edge: "right"});
-
-    // let leftSideNavs = document.querySelectorAll('.sidenav.left');
-    // M.Sidenav.init(leftSideNavs, {edge: "left"});
-});
+    //close sidenav is a helper function that will take the element from the DOM
+    //and close the sidenav of it
+    closeSidenav: element =>{
+        let instance = M.Sidenav.getInstance(element);
+        instance.close();
+    }
+};

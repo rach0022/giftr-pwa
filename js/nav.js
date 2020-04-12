@@ -14,6 +14,7 @@
 
 import {pubsub} from './pubsub.js';
 import {giftrRequests} from './requests.js';
+import {ui} from './ui.js';
 
 export const nav = {
     //loginStatus will have true or false if logged in and will be defaulted to false when app loads
@@ -37,8 +38,7 @@ export const nav = {
         container.appendChild(sidenav);
 
         //init the materialize side nav for the profile
-        let instances = document.querySelectorAll('#profileSlideout');
-        M.Sidenav.init(instances, {edge: "right"});
+        ui.initSidenav('profileSlideout', 'right')
 
         
 
@@ -91,8 +91,8 @@ export const nav = {
         let sidenav = document.querySelector('#profileSlideout');
         console.log(sidenav);
         //set the appropriate text content
-        sidenav.querySelector('.lname').textContent = 'first: ' +  profile.lastName;
-        sidenav.querySelector('.fname').textContent = 'last: ' + profile.firstName;
+        sidenav.querySelector('.fname').textContent = 'First Name: ' +  profile.firstName;
+        sidenav.querySelector('.lname').textContent = 'Last Name: ' + profile.lastName;
         sidenav.querySelector('.email').textContent = 'email: ' + profile.email;
 
         //init materialize js fucntionality
@@ -108,8 +108,7 @@ export const nav = {
         pubsub.publish('loginStatus', false);
 
         //close the form
-        let instance = M.Sidenav.getInstance(document.getElementById('profileSlideout'));
-        instance.close();
+        ui.closeSidenav(document.getElementById('profileSlideout'));
 
         //tell the user
         M.toast({html: 'logged out'})

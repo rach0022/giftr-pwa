@@ -13,6 +13,7 @@ import {nav} from './nav.js';
 import {signInForm} from './forms/signIn.js';
 import {signUpForm} from './forms/signUp.js';
 import {personList} from './personList.js';
+import {addPersonForm} from './forms/addPerson.js'
 
 let giftr = {
     init: ev => {
@@ -26,6 +27,7 @@ let giftr = {
         signInForm.render(document.body);
         signUpForm.render(document.body);
         personList.render(document.querySelector('main'));
+        addPersonForm.render(document.body);
 
         //tell the modules if user is logged in or not
         if(token) {
