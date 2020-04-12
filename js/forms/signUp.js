@@ -89,5 +89,6 @@ export const signUpForm = {
     closeInstance: inst =>{
         let instance = M.Sidenav.getInstance(inst);
         instance.close();
+        // inst.reset();
     }
 };

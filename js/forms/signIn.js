@@ -65,8 +65,6 @@ export const signInForm = {
                     console.log("This is the error", err);
             });
         }
-        //reset the form
-        form.querySelector('form').reset();
 
         //close the form
         //first check if the user is logged in then close the form
@@ -85,5 +83,6 @@ export const signInForm = {
     closeInstance: inst =>{
         let instance = M.Sidenav.getInstance(inst);
         instance.close();
+        // inst.reset();
     }
 };
