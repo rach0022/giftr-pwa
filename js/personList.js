@@ -95,6 +95,7 @@ export const personList = {
             card.querySelector('.card').setAttribute('data-personid', person._id);
             card.querySelector('.card-content').textContent = person.name + '\n' + person.birthDate +  '\n' + person.gifts;
             card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
+            card.querySelector('.showGifts').setAttribute('data-personid', person._id);
 
             //set the event listeners for the buttons (show person/ delete)
             card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
@@ -111,6 +112,8 @@ export const personList = {
     //callback function to bind to show gifts button on person card
     showGifts: ev =>{
         ev.preventDefault();
+        sessionStorage.setItem('GIFTR-PersonID', ev.currentTarget.getAttribute('data-personid'));
+        pubsub.publish('loadGifts', true);
     },
 
     //callback function to delete the selected person

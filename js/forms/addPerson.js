@@ -40,25 +40,27 @@ export const addPersonForm = {
         let req = giftrRequests.send('POST', '/api/people/', {name, birthDate}, true, true);
         console.log(req, {name, birthDate});
 
-        //fetch the request (send the data to the server)
-        fetch(req)
-            .then(res => res.json())
-            .then(data => {
-                if(data.errors){
-                    M.toast({html: 'error sending person'});
-                    console.log('error sending person', data.errors)
-                } else if (data.data){
-                    return data.data
-                }
-            })
-            .then(data =>{
-                console.log(data);
-                //tell the program there is a change and close the sidenav
-                pubsub.publish('loginStatus', true); //change later to a different event 
-                ui.closeSidenav(form);
+        if(req){
+            //fetch the request (send the data to the server)
+            fetch(req)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.errors){
+                        M.toast({html: 'error adding person'});
+                        console.log('error sending person', data.errors)
+                    } else if (data.data){
+                        return data.data
+                    }
+                })
+                .then(data =>{
+                    console.log(data);
+                    //tell the program there is a change and close the sidenav
+                    pubsub.publish('loginStatus', true); //change later to a different event 
+                    ui.closeSidenav(form);
 
-            })
-            .catch(err => console.error(err));
+                })
+                .catch(err => console.error(err));
+        }
     },
     cancel: ev =>{
         ev.preventDefault();

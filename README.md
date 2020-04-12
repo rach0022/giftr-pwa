@@ -26,7 +26,8 @@
 
 ### Reminders: 
 - Make sure to init side navs for right and left side seperately. maybe just init inside each seperate module
-- MAke sure to use Toasts (M.toast({html: info})) for user alerts
+- Make sure to use Toasts (M.toast({html: info})) for user alerts
+- Refactor all fetchs in api to use a function built in requests.js (noticing pattenerns between every request dont need to rewrite that code)
 
 ### Bugs: 
 - [x] Fix login and signup links dissapearing on larger screens (possibly just a materialize class) || add class show-on-large to links in nav to see on larger screens
