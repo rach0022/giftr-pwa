@@ -97,7 +97,7 @@ export const giftList = {
             card.querySelector('.card-content').textContent = 
                 `Price: ${gift.price}
                  StoreName: ${gift.store.name}
-                 StoreURL: ${gift.store.productURL}
+                 StoreURL: ${gift.store.productUrl}
                  imageURL: ${gift.imageUrl}`;
             card.querySelector('.deleteGift').setAttribute('data-giftid', gift._id);
 

@@ -7,6 +7,7 @@
     <!-- materialize css library  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="./css/materialize.min.css">
+    <link rel="stylesheet" href="./css/style.css">
     <!-- pwa manifest and android support (theme color) -->
     <!-- ios support  -->
 </head>
@@ -118,6 +119,7 @@
 <template id="addPersonTemplate">
     <div class="modal" id="addPersonForm">
         <div class="modal-content">
+            <h4 class="center">Add Person</h4>
             <form action="" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
@@ -174,8 +176,8 @@
 
 <!-- card template  (could be for person list or gift list)-->
 <template id="cardTemplate">
-    <div class="card horizontal blue s10 offset-s1">
-            <div class="card-image">
+    <div class="card horizontal blue col s10 offset-s1">
+            <div class="card-image row s12">
                 <img src="./res/img/star.png"> 
             </div>
             <div class="card-stacked">

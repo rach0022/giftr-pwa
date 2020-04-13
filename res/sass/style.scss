@@ -1,3 +1,11 @@
 //run the below command to compile SASS
 //sass --watch /res/sass/style.scss:css/style.css
 //this is the override styles for materialize 
+@import 'variables';
+@import 'fonts';
+@import 'mixins';
+
+.modal { 
+    max-height: 100%; //increase modal height to support form content
+    overflow: visible;
+}

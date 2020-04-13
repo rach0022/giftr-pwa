@@ -39,5 +39,5 @@
 
 ### Bugs: 
 - [x] Fix login and signup links dissapearing on larger screens (possibly just a materialize class) || add class show-on-large to links in nav to see on larger screens
-- [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it
+- [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it || fixed everything except for imageURL for gifts, ask steve
 - [x] price for gift is always null when sent

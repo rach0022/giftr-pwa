@@ -37,9 +37,9 @@ export const addPersonForm = {
 
         let name = form.querySelector('#fullname-person').value;
         let birthDate = form.querySelector('#birthdate-person').value;
-        let imageUrl = form.querySelector('#imageUrl-person').value;
-        let req = giftrRequests.send('POST', '/api/people/', {name, birthDate, imageUrl}, true, true);
-        // console.log(req, {name, birthDate, imageUrl});
+        let imageURL = form.querySelector('#imageUrl-person').value;
+        let req = giftrRequests.send('POST', '/api/people/', {name, birthDate, imageURL}, true, true);
+        // console.log(req, {name, birthDate, imageURL});
 
         if(req){
             //fetch the request (send the data to the server)

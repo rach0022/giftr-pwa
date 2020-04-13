@@ -47,7 +47,7 @@ export const addGiftForm = {
         let name = form.querySelector('#name-gift').value;
         let price = parseInt(form.querySelector('#price-gift').value);
         store.name = form.querySelector('#storename-gift').value;
-        store.productURL = form.querySelector('#storeURL-gift').value;
+        store.productUrl = form.querySelector('#storeURL-gift').value;
         let imageUrl = form.querySelector('#imageURL-gift').value;
 
         let req = giftrRequests.send(
@@ -67,8 +67,9 @@ export const addGiftForm = {
                         M.toast({html: 'error adding gift'});
                         console.log('error sending person', data.errors)
                     } else if (data.data){
-                        return data.data
+                        
                     }
+                    return data.data || data.errors
                 })
                 .then(data =>{
                     console.log(data);
