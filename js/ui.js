@@ -31,5 +31,12 @@ export const ui = {
     closeModal: (element) =>{
         let instance = M.Modal.getInstance(element);
         instance.close();
+    },
+
+    //start of helper/ callback functions to style the ui like checking if the birthday is past
+    parseDate: dateResponse =>{
+        return new Date(dateResponse);
     }
+
+
 };

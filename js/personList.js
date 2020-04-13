@@ -10,6 +10,7 @@
 
 import {giftrRequests} from './requests.js';
 import { pubsub } from './pubsub.js';
+import {ui} from './ui.js';
 
 export const personList = {
 
@@ -98,7 +99,7 @@ export const personList = {
             card.querySelector('.card-title').textContent = person.name;
 
             card.querySelector('.card').setAttribute('data-personid', person._id);
-            card.querySelector('.card-content').textContent = person.name + '\n' + person.birthDate +  '\n' + person.gifts;
+            card.querySelector('.card-content').textContent = ui.parseDate(person.birthDate);
             card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
             card.querySelector('.showGifts').setAttribute('data-personid', person._id);
 
