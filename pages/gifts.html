@@ -16,7 +16,8 @@
   </head>
   <body>
     <nav></nav>
-    <main></main>
+    <main>
+    </main>
     <!-- materialize js -->
     <script src="../js/materialize.min.js"></script>
     <script type="module" src="../js/gift.js"></script>
@@ -54,10 +55,10 @@
     </ul>
 </template>
 
-<!-- template for gift rendered in main -->
+<!-- collection template for gift list  -->
 <template id="giftListTemplate">
-    <div  id="giftList" class="row">
-    </div>
+    <ul class="collection with-header" id="giftList">
+    </ul>
     <div class="fixed-action-btn" id="addGift">
         <a href="#" class="btn-floating btn-large green modal-trigger" data-target="addGiftForm">
             <i class="large material-icons">add</i>
@@ -65,22 +66,14 @@
     </div>
 </template>
 
-<!-- card template  (could be for person list or gift list)-->
-<template id="cardTemplate">
-    <div class="card horizontal col s10 offset-s1 z-depth-2">
-        <div class="card-image">
-            <img src="../res/img/star.png">
-        </div>
-        <div class="card-stacked">
-            <span class="card-title center"></span>
-            <div class="card-content right"></div>
-            <div class="card-action">
-                <div class="row center">
-                    <a href="#" class="waves-effect waves-light btn s6 deleteGift"><i class="material-icons">remove</i></a>
-                </div>
-            </div>
-        </div>
-    </div>
+<!-- collection item template for gifts: -->
+<template id="collectionTemplate">
+    <li class="collection-item avatar">
+        <img src="#" alt="Image for the Gift Idea" class="circle">
+        <span class="title"></span>
+        <p></p>
+        <a href="#" class="secondary-content waves-effect waves-light btn s6 deleteGift"><i class="material-icons">delete</i></a>
+    </li>
 </template>
 
 <!-- template for add gift form (change) -->
