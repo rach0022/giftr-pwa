@@ -12,7 +12,9 @@
 - [ ] figure out form validation with materialize forms
 - [ ] make sure nav bar changes when the person is logged in
 - [x] switch to modals for add Gift/Person forms
-- [ ] fix Gift Modal to not be scrollable
+- [x] fix Gift Modal to not be scrollable
+- [ ] maybe switch to collections instead of cards for the person/ gift list
+- [x] add GIFTR-SPA functionality like sorting by birthdate, checking if birthdate is past, formatting dates, formatting currency
 
 ### Templates/ Componenets to Decide on Based on Materialize:
 - [x] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
@@ -41,3 +43,4 @@
 - [x] Fix login and signup links dissapearing on larger screens (possibly just a materialize class) || add class show-on-large to links in nav to see on larger screens
 - [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it || fixed everything except for imageURL for gifts, ask steve
 - [x] price for gift is always null when sent
+- [x] sort birthday is not working

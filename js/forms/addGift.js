@@ -45,7 +45,7 @@ export const addGiftForm = {
         let store = {}; //create an empty object to hold the store values
 
         let name = form.querySelector('#name-gift').value;
-        let price = parseInt(form.querySelector('#price-gift').value);
+        let price = parseInt(form.querySelector('#price-gift').value)*100; //we want to send the cents value of the price
         store.name = form.querySelector('#storename-gift').value;
         store.productUrl = form.querySelector('#storeURL-gift').value;
         let imageUrl = form.querySelector('#imageURL-gift').value;

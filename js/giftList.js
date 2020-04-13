@@ -10,6 +10,7 @@
 
 import {giftrRequests} from './requests.js';
 import { pubsub } from './pubsub.js';
+import {ui} from './ui.js';
 
 export const giftList = {
     personId: null, //container for the person id stored in session storage
@@ -95,7 +96,7 @@ export const giftList = {
             }
             card.querySelector('.card-title').textContent = gift.name;
             card.querySelector('.card-content').textContent = 
-                `Price: ${gift.price}
+                `Price: ${ui.formatCurrency(gift.price)}
                  StoreName: ${gift.store.name}
                  StoreURL: ${gift.store.productUrl}
                  imageURL: ${gift.imageUrl}`;

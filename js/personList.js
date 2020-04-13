@@ -74,6 +74,7 @@ export const personList = {
             })
             .then(people =>{
                 console.log(people);
+                people.sort(ui.sortBirthdate);
                 personList.buildPersonCards(people);
             })
             .catch(err =>{
@@ -92,6 +93,10 @@ export const personList = {
             console.log(person);
             let card = template.content.cloneNode(true); //get the card
 
+            //set any classes necessary like past
+            let birthCheck = ui.isBirthdayPast(person.birthDate);
+            if(birthCheck) card.querySelector('.card').classList.add(birthCheck); 
+
             //set the content and attributes for the card
             if(person.imageUrl){
                 card.querySelector('img').src = person.imageUrl; 
@@ -99,7 +104,7 @@ export const personList = {
             card.querySelector('.card-title').textContent = person.name;
 
             card.querySelector('.card').setAttribute('data-personid', person._id);
-            card.querySelector('.card-content').textContent = ui.parseDate(person.birthDate);
+            card.querySelector('.card-content').textContent = ui.formatDate(person.birthDate);
             card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
             card.querySelector('.showGifts').setAttribute('data-personid', person._id);
 
