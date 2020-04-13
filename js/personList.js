@@ -13,7 +13,7 @@ import { pubsub } from './pubsub.js';
 import {ui} from './ui.js';
 
 export const personList = {
-
+    emptyMessage: 'You Have no Friends Added, please press the green button to add a friend',
     //render the person list in whatever contaienr sepecified
     render: container =>{
         //get/clone the template
@@ -88,36 +88,41 @@ export const personList = {
         let template = document.getElementById('cardTemplate');
         let frag = document.createDocumentFragment();
 
-        //go through everyone in the array and create the cards cloning the template
-        people.forEach(person =>{
-            console.log(person);
-            let card = template.content.cloneNode(true); //get the card
+        if(people.length > 0){
+            //go through everyone in the array and create the cards cloning the template
+            people.forEach(person =>{
+                console.log(person);
+                let card = template.content.cloneNode(true); //get the card
 
-            //set any classes necessary like past
-            let birthCheck = ui.isBirthdayPast(person.birthDate);
-            if(birthCheck) card.querySelector('.card').classList.add(birthCheck); 
+                //set any classes necessary like past
+                let birthCheck = ui.isBirthdayPast(person.birthDate);
+                if(birthCheck) card.querySelector('.card').classList.add(birthCheck); 
 
-            //set the content and attributes for the card
-            if(person.imageUrl){
-                card.querySelector('img').src = person.imageUrl; 
-            }
-            card.querySelector('.card-title').textContent = person.name;
+                //set the content and attributes for the card
+                if(person.imageUrl){
+                    card.querySelector('img').src = person.imageUrl; 
+                }
+                card.querySelector('.card-title').textContent = person.name;
 
-            card.querySelector('.card').setAttribute('data-personid', person._id);
-            card.querySelector('.card-content').textContent = ui.formatDate(person.birthDate);
-            card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
-            card.querySelector('.showGifts').setAttribute('data-personid', person._id);
+                card.querySelector('.card').setAttribute('data-personid', person._id);
+                card.querySelector('.card-content').textContent = ui.formatDate(person.birthDate);
+                card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
+                card.querySelector('.showGifts').setAttribute('data-personid', person._id);
 
-            //set the event listeners for the buttons (show person/ delete)
-            card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
-            card.querySelector('.deletePerson').addEventListener('click', personList.deletePerson);
+                //set the event listeners for the buttons (show person/ delete)
+                card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
+                card.querySelector('.deletePerson').addEventListener('click', personList.deletePerson);
 
-            //append the card to the ul
-            frag.appendChild(card);
-        });
-
+                //append the card to the ul
+                frag.appendChild(card);
+            });
+        } else {
+            let heading = document.createElement('h5');
+            heading.textContent = personList.emptyMessage;
+            heading.classList.add('center-align');
+            frag.appendChild(heading);
+        }
         document.getElementById('personList').appendChild(frag);
-
     },
 
     //callback function to bind to show gifts button on person card

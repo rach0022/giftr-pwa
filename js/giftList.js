@@ -14,6 +14,7 @@ import {ui} from './ui.js';
 
 export const giftList = {
     personId: null, //container for the person id stored in session storage
+    emptyMessage: 'You have no gifts added, press the green button to add',
     render: container =>{
         let template = document.getElementById('giftListTemplate');
         // let template = document.getElementById('giftListTemplate');
@@ -86,60 +87,41 @@ export const giftList = {
         let template = document.getElementById('collectionTemplate');
         // let template = document.getElementById('cardTemplate');
         let frag = document.createDocumentFragment();
-        if(gifts.length == 0) console.log('you did it!');
-        // gifts.forEach(gift =>{
-        //     console.log(gift);
-        //     let card = template.content.cloneNode(true); //get the card
+        if(gifts.length > 0){
+            gifts.forEach(gift =>{
+                let item = template.content.cloneNode(true); //get the card
+                let del_btn = item.querySelector('.deleteGift');
+                let link = document.createElement('a');
+                let text = item.querySelector('p');
 
-        //     //set the content and attributes for the card
-        //     card.querySelector('.card').setAttribute('data-giftid', gift._id);
-        //     if(gift.imageUrl){
-        //         card.querySelector('img').src = gift.imageUrl; 
-        //     }
-        //     card.querySelector('.card-title').textContent = gift.name;
-        //     card.querySelector('.card-content').textContent = 
-        //         `Price: ${ui.formatCurrency(gift.price)}
-        //          StoreName: ${gift.store.name}
-        //          StoreURL: ${gift.store.productUrl}
-        //          imageURL: ${gift.imageUrl}`;
-        //     card.querySelector('.deleteGift').setAttribute('data-giftid', gift._id);
+                //set the classes and attributes
+                item.querySelector('.collection-item').setAttribute('data-giftid', gift._id);
+                del_btn.setAttribute('data-giftid', gift._id);
+                link.href = gift.store.productUrl; 
 
+                //set the content
+                item.querySelector('.title').textContent = gift.name
+                link.textContent = gift.store.name
+                if(gift.imageUrl){
+                    item.querySelector('img').src = gift.imageUrl;
+                } else {
+                    item.querySelector('img').src = '../res/img/star.png';
+                }
+                text.textContent = `Price: ${ui.formatCurrency(gift.price)} Store: `;
 
-        //     //set the event listeners for the buttons (show person/ delete)
-        //     card.querySelector('.deleteGift').addEventListener('click', giftList.deleteGift);
+                //set the listeners: 
+                del_btn.addEventListener('click', giftList.deleteGift);
 
-        //     //append the card to the ul
-        //     frag.appendChild(card);
-        // })
-        gifts.forEach(gift =>{
-            let item = template.content.cloneNode(true); //get the card
-            let del_btn = item.querySelector('.deleteGift');
-            let link = document.createElement('a');
-            let text = item.querySelector('p');
-
-            //set the classes and attributes
-            item.querySelector('.collection-item').setAttribute('data-giftid', gift._id);
-            del_btn.setAttribute('data-giftid', gift._id);
-            link.href = gift.store.productUrl; 
-
-            //set the content
-            item.querySelector('.title').textContent = gift.name
-            link.textContent = gift.store.name
-            if(gift.imageUrl){
-                item.querySelector('img').src = gift.imageUrl;
-            } else {
-                item.querySelector('img').src = '../res/img/star.png';
-            }
-            text.textContent = `Price: ${ui.formatCurrency(gift.price)} Store: `;
-
-            //set the listeners: 
-            del_btn.addEventListener('click', giftList.deleteGift);
-
-            //append to each other and then to the frag
-            text.appendChild(link);
-            frag.appendChild(item);
-        })
-
+                //append to each other and then to the frag
+                text.appendChild(link);
+                frag.appendChild(item);
+            })
+        } else {
+            let heading = document.createElement('h5');
+            heading.textContent = giftList.emptyMessage;
+            heading.classList.add('center-align');
+            frag.appendChild(heading);
+        }
         document.getElementById('giftList').appendChild(frag);
     },
 

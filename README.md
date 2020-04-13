@@ -3,7 +3,7 @@
 
 ### To Do: 
 - [ ] create icon for web app
-- [ ] draw out some paper prototype ideas for this applicationa and decide on which componenets I need to use from materailize
+- [x] draw out some paper prototype ideas for this applicationa and decide on which componenets I need to use from materailize
 - [ ] create x-icon for desktop version 
 - [x] link materialize library (self hosted for offline use)
 - [ ] decide on a colour scheme (add class to body based on colour scheme)
@@ -13,8 +13,10 @@
 - [ ] make sure nav bar changes when the person is logged in
 - [x] switch to modals for add Gift/Person forms
 - [x] fix Gift Modal to not be scrollable
-- [ ] maybe switch to collections instead of cards for the person/ gift list
+- [x] maybe switch to collections instead of cards for the person/ gift list | only used for gifts as they have one button only
 - [x] add GIFTR-SPA functionality like sorting by birthdate, checking if birthdate is past, formatting dates, formatting currency
+- [x] add Empty list message for gifts and person list if there are no gifts or people added
+- [ ] switch signout link to outside of profile section and move to header 
 
 ### Templates/ Componenets to Decide on Based on Materialize:
 - [x] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
