@@ -125,7 +125,14 @@ export const personList = {
 
                 //set any classes and attributes needed
                 let birthCheck = ui.isBirthdayPast(person.birthDate);
-                item.querySelector('.collection-item').classList.add(birthCheck);
+                if(birthCheck){
+                    item.querySelector('.collection-item').classList.add(birthCheck);
+                    let badge = document.createElement('span');
+                    badge.classList.add('red', 'badge');
+                    badge.textContent = 'birthday past';
+                    item.querySelector('.collection-item').appendChild(badge);
+                }
+                
                 item.querySelector('.collection-item').setAttribute('data-personid', person._id);
                 del_btn.setAttribute('data-personid', person._id);
                 gift_btn.setAttribute('data-personid', person._id);

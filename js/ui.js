@@ -83,10 +83,10 @@ export const ui = {
             if(comparisonDate.getDate() > today.getDate() || comparisonDate.getDate() == today.getDate()){
                 return undefined;
             } else {
-                return 'grey';
+                return 'darken-4';
             }
         } else {
-            return 'grey';
+            return 'darken-4';
         }
     },
 
