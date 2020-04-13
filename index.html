@@ -168,11 +168,11 @@
     </ul>
 </template>
 
-<!-- template for person list rendered in main -->
+<!-- collection templates (rendered in main)  -->
+<!-- collection holder template  -->
 <template id="personListTemplate">
-    <div  id="personList" class="row">
-        <h3>User is not logged in, please log in to access our full app</h3>
-    </div>
+    <ul class="collection with-header" id="personList">
+    </ul>
     <div class="fixed-action-btn hide" id="addPerson">
         <a href="#" class="btn-floating btn-large green modal-trigger" data-target="addPersonForm">
             <i class="large material-icons">add</i>
@@ -180,23 +180,17 @@
     </div>
 </template>
 
-<!-- card template  (could be for person list or gift list)-->
-<template id="cardTemplate">
-    <div class="card horizontal col s10 offset-s1 z-depth-2">
-            <div class="card-image row s12">
-                <img src="./res/img/star.png"> 
-            </div>
-            <div class="card-stacked">
-                <span class="card-title center"></span>
-                <div class="card-content right"></div>
-                <div class="card-action">
-                    <div class="row center">
-                        <a href="#" class="waves-effect waves-light btn s6 showGifts"><i class="material-icons">redeem</i></a>
-                        <a href="#" class="waves-effect waves-light btn s6 deletePerson"><i class="material-icons">remove</i></a>
-                    </div>
-                </div>
+<!-- collection item template  -->
+<template id="collectionTemplate">
+    <li class="collection-item avatar">
+        <img src="#" alt="Friend Avatar image" class="circle">
+        <span class="title"></span>
+        <p></p>
+        <div class="secondary-content">
+            <a href="#" class="waves-effect waves-light btn s6 showGifts"><i class="material-icons">redeem</i></a>
+            <a href="#" class="waves-effect waves-light btn s6 deletePerson"><i class="material-icons">delete</i></a>
         </div>
-    </div>
+    </li>
 </template>
 
 <!-- uncommented ideas:  -->
@@ -213,4 +207,19 @@
                         </div>
                     </form>
                 </div> 
+
+                <div class="row">
+            <form action="" class="col s12">
+                <div class="row center">
+                    <div class="input-field col s10 offset-s1">
+                        <i class="material-icons prefix">security</i>
+                        <input type="password" name="" id="changePassword" class="validate col s10 offset-s1">
+                        <label for="changePassword">New Password</label>
+                    </div>
+                </div>
+                <div class="row center">
+                    <a href="#" class="waves-effect waves-light btn s6" id="submit_person">Change Password</a>
+                </div>
+            </form>
+        </div>
 -->

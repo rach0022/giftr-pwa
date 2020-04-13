@@ -16,7 +16,7 @@
 - [x] maybe switch to collections instead of cards for the person/ gift list | only used for gifts as they have one button only
 - [x] add GIFTR-SPA functionality like sorting by birthdate, checking if birthdate is past, formatting dates, formatting currency
 - [x] add Empty list message for gifts and person list if there are no gifts or people added
-- [ ] switch signout link to outside of profile section and move to header 
+- [ ] switch signout link to outside of profile section and move to header
 
 ### Templates/ Componenets to Decide on Based on Materialize:
 - [x] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
@@ -46,3 +46,4 @@
 - [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it || fixed everything except for imageURL for gifts, ask steve
 - [x] price for gift is always null when sent
 - [x] sort birthday is not working
+- [ ] figure out why date formatted is always one day before the actual date given

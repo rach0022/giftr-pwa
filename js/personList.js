@@ -85,37 +85,66 @@ export const personList = {
 
     //helper function to build card list, given the data from teh fetch resp as parameter
     buildPersonCards: people =>{
-        let template = document.getElementById('cardTemplate');
+        let template = document.getElementById('collectionTemplate');
+        // let template = document.getElementById('cardTemplate');
         let frag = document.createDocumentFragment();
 
         if(people.length > 0){
             //go through everyone in the array and create the cards cloning the template
+            // people.forEach(person =>{
+            //     console.log(person);
+            //     let card = template.content.cloneNode(true); //get the card
+
+            //     //set any classes necessary like past
+            //     let birthCheck = ui.isBirthdayPast(person.birthDate);
+            //     if(birthCheck) card.querySelector('.card').classList.add(birthCheck); 
+
+            //     //set the content and attributes for the card
+            //     if(person.imageUrl){
+            //         card.querySelector('img').src = person.imageUrl; 
+            //     }
+            //     card.querySelector('.card-title').textContent = person.name;
+
+            //     card.querySelector('.card').setAttribute('data-personid', person._id);
+            //     card.querySelector('.card-content').textContent = ui.formatDate(person.birthDate);
+            //     card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
+            //     card.querySelector('.showGifts').setAttribute('data-personid', person._id);
+
+            //     //set the event listeners for the buttons (show person/ delete)
+            //     card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
+            //     card.querySelector('.deletePerson').addEventListener('click', personList.deletePerson);
+
+            //     //append the card to the ul
+            //     frag.appendChild(card);
+            // });
             people.forEach(person =>{
-                console.log(person);
-                let card = template.content.cloneNode(true); //get the card
+                let item = template.content.cloneNode(true);
+                let del_btn = item.querySelector('.deletePerson');
+                let gift_btn = item.querySelector('.showGifts');
+                let p = item.querySelector('p');
 
-                //set any classes necessary like past
+                //set any classes and attributes needed
                 let birthCheck = ui.isBirthdayPast(person.birthDate);
-                if(birthCheck) card.querySelector('.card').classList.add(birthCheck); 
+                item.querySelector('.collection-item').classList.add(birthCheck);
+                item.querySelector('.collection-item').setAttribute('data-personid', person._id);
+                del_btn.setAttribute('data-personid', person._id);
+                gift_btn.setAttribute('data-personid', person._id);
 
-                //set the content and attributes for the card
+                //set the content
+                item.querySelector('.title').textContent = person.name;
                 if(person.imageUrl){
-                    card.querySelector('img').src = person.imageUrl; 
+                    item.querySelector('img').src = person.imageUrl;
+                } else {
+                    item.querySelector('img').src = '../res/img/star.png';
                 }
-                card.querySelector('.card-title').textContent = person.name;
+                p.textContent = ui.formatDate(person.birthDate);
 
-                card.querySelector('.card').setAttribute('data-personid', person._id);
-                card.querySelector('.card-content').textContent = ui.formatDate(person.birthDate);
-                card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
-                card.querySelector('.showGifts').setAttribute('data-personid', person._id);
+                //set the listeners
+                gift_btn.addEventListener('click', personList.showGifts);
+                del_btn.addEventListener('click', personList.deletePerson);
 
-                //set the event listeners for the buttons (show person/ delete)
-                card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
-                card.querySelector('.deletePerson').addEventListener('click', personList.deletePerson);
-
-                //append the card to the ul
-                frag.appendChild(card);
-            });
+                frag.appendChild(item); //append to the frag
+            })
         } else {
             let heading = document.createElement('h5');
             heading.textContent = personList.emptyMessage;
@@ -123,6 +152,7 @@ export const personList = {
             frag.appendChild(heading);
         }
         document.getElementById('personList').appendChild(frag);
+
     },
 
     //callback function to bind to show gifts button on person card
