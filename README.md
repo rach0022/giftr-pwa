@@ -11,6 +11,8 @@
 - [ ] create some base materialize templates to use
 - [ ] figure out form validation with materialize forms
 - [ ] make sure nav bar changes when the person is logged in
+- [x] switch to modals for add Gift/Person forms
+- [ ] fix Gift Modal to not be scrollable
 
 ### Templates/ Componenets to Decide on Based on Materialize:
 - [x] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out

@@ -21,5 +21,15 @@ export const ui = {
     closeSidenav: element =>{
         let instance = M.Sidenav.getInstance(element);
         instance.close();
+    },
+
+    initModal: (elementID, opts) =>{
+        let instances = document.querySelectorAll(`#${elementID}`);
+        M.Modal.init(instances, opts);
+    },
+
+    closeModal: (element) =>{
+        let instance = M.Modal.getInstance(element);
+        instance.close();
     }
 };

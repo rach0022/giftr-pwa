@@ -35,7 +35,7 @@ export const addGiftForm = {
         container.appendChild(form);
 
         //init any materialzie js events needed
-        ui.initSidenav('addGiftForm', 'left');
+        ui.initModal('addGiftForm', {opacity: '0.5'});
 
         //subscribe to any pubsub events needed
     },
@@ -73,7 +73,7 @@ export const addGiftForm = {
                 .then(data =>{
                     console.log(data);
                     pubsub.publish('loadGifts', true); //will change this later
-                    ui.closeSidenav(form);
+                    ui.closeModal(form);
                 })
                 .catch(err => console.error(err));
         }
@@ -82,6 +82,6 @@ export const addGiftForm = {
         ev.preventDefault();
         let form = document.getElementById('addGiftForm');
         form.querySelector('form').reset();
-        ui.closeSidenav(form);
+        ui.closeModal(form);
     }
 }

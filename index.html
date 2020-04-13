@@ -116,9 +116,8 @@
 
 <!-- template for add person form  -->
 <template id="addPersonTemplate">
-    <ul id="addPersonForm" class="sidenav">
-        <li><a href="#" class="subheader center">Add Person</a></li>
-        <div class="row">
+    <div class="modal" id="addPersonForm">
+        <div class="modal-content">
             <form action="" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
@@ -145,7 +144,7 @@
                 <a href="#" class="waves-effect waves-light btn s6" id="cancel_person"><i class="material-icons">remove</i></a>
             </form>
         </div>
-    </ul>
+    </div>
 </template>
 
 <!-- template for profile side nav -->
@@ -167,7 +166,7 @@
         <h3>User is not logged in, please log in to access our full app</h3>
     </div>
     <div class="fixed-action-btn hide" id="addPerson">
-        <a href="#" class="btn-floating btn-large green sidenav-trigger" data-target="addPersonForm">
+        <a href="#" class="btn-floating btn-large green modal-trigger" data-target="addPersonForm">
             <i class="large material-icons">add</i>
         </a>
     </div>

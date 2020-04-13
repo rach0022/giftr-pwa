@@ -26,7 +26,7 @@ export const addPersonForm = {
         container.appendChild(form);
 
         //init any materialize js functionality needed (taken from materialize docs)
-        ui.initSidenav('addPersonForm', 'left');
+        ui.initModal('addPersonForm', {opacity: '0.5'});
 
         //subscribe to any pubsub events needed:
     },
@@ -57,7 +57,7 @@ export const addPersonForm = {
                     console.log(data);
                     //tell the program there is a change and close the sidenav
                     pubsub.publish('loginStatus', true); //change later to a different event 
-                    ui.closeSidenav(form);
+                    ui.closeModal(form);
 
                 })
                 .catch(err => console.error(err));
@@ -67,6 +67,6 @@ export const addPersonForm = {
         ev.preventDefault();
         let form = document.getElementById('addPersonForm');
         form.querySelector('form').reset();
-        ui.closeSidenav(form);
+        ui.closeModal(form);
     }
 }
