@@ -104,17 +104,12 @@ export const giftList = {
 
 
             //set the event listeners for the buttons (show person/ delete)
-            card.querySelector('.editGift').addEventListener('click', giftList.editGift);
             card.querySelector('.deleteGift').addEventListener('click', giftList.deleteGift);
 
             //append the card to the ul
             frag.appendChild(card);
         })
         document.getElementById('giftList').appendChild(frag);
-    },
-
-    editGift: ev => {
-        ev.preventDefault();
     },
 
     deleteGift: ev =>{
@@ -137,6 +132,4 @@ export const giftList = {
             })
             .catch(err => console.error(err));
     }
-
-
 }

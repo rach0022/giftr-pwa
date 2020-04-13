@@ -48,7 +48,7 @@ export const signInForm = {
                     ui.closeSidenav(form);
                     console.log(res);
                     if (res.errors){
-                        console.log("There was an error signing in");
+                        console.log("signin failed");
                         M.toast({html: 'signin failed'});
 
                     }

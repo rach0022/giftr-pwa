@@ -7,6 +7,8 @@
 *  @version Apr 11, 2020
 *
 ***********************/
+
+import { pubsub } from "./pubsub.js";
 export const giftrRequests = {
     //the base url for the app, could be localhost or giftr api
     // baseURL: 'http://localhost:3030',
@@ -60,9 +62,37 @@ export const giftrRequests = {
         return new Request(uri, opts);
     },
 
+    //helper function to preform the fetch to the api using the request
+    //from send, will display the success or error message as a toast
+    //if supplied and will then fire off the callback function given the data.data
+    //or fire off the error modal with data.errors
+    //if the catch happens usually its a fatal error so lets 
+    //navigate back to the main page and log out for now (change later)
+    fetch: (req, successMessage, errorMessage, callback) =>{
+        fetch(req)
+            .then(data =>{
+                if(data.errors){
+                    M.toast({html: errorMessage});
+                    giftrRequests.error(data.errors)
+                } else if (data.data) {
+                    M.toast({html: successMessage})
+                    callback(data.data)
+                }
+                return data;
+            })
+            .then(callback)
+            .catch(err =>{
+                console.error(err);
+                M.toast({html: 'Fatal Error Occured'});
+                sessionStorage.removeItem('GIFTR-UserToken');
+                pubsub.publish('loginStatus', false);
+                // window.location.href = '/index.html';
+            })
+    },
+
     //send error: when we encouter an error with authroization or creating the request send this error
     error: info =>{
-        console.log(info);
+        console.log('Non fatal error occured:', info);
         return null; //return null so we know we dont have a request built
     }
 }
