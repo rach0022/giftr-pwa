@@ -124,14 +124,6 @@ export const personList = {
                 let p = item.querySelector('p');
 
                 //set any classes and attributes needed
-                let birthCheck = ui.isBirthdayPast(person.birthDate);
-                if(birthCheck){
-                    item.querySelector('.collection-item').classList.add(birthCheck);
-                    let badge = document.createElement('span');
-                    badge.classList.add('red', 'badge');
-                    badge.textContent = 'birthday past';
-                    item.querySelector('.collection-item').appendChild(badge);
-                }
                 
                 item.querySelector('.collection-item').setAttribute('data-personid', person._id);
                 del_btn.setAttribute('data-personid', person._id);
@@ -145,6 +137,16 @@ export const personList = {
                     item.querySelector('img').src = '../res/img/star.png';
                 }
                 p.textContent = ui.formatDate(person.birthDate);
+
+                //check if the birthday is past or style differntly
+                let birthCheck = ui.isBirthdayPast(person.birthDate);
+                if(birthCheck){
+                    item.querySelector('.collection-item').classList.add(birthCheck);
+                    let badge = document.createElement('span');
+                    badge.classList.add('red', 'badge', 'center');
+                    badge.textContent = 'birthday past';
+                    item.querySelector('.secondary-content').appendChild(badge);
+                }
 
                 //set the listeners
                 gift_btn.addEventListener('click', personList.showGifts);
