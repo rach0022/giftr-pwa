@@ -67,7 +67,7 @@ export const personList = {
                     M.toast({html: 'error fetching person list'});
                 }
                 if(data.data){
-                    M.toast({html: 'retrieved person list'});
+                    // M.toast({html: 'retrieved person list'});
                     return data.data
                 }
             })
@@ -92,6 +92,11 @@ export const personList = {
             let card = template.content.cloneNode(true); //get the card
 
             //set the content and attributes for the card
+            if(person.imageUrl){
+                card.querySelector('img').src = person.imageUrl; 
+            }
+            card.querySelector('.card-title').textContent = person.name;
+
             card.querySelector('.card').setAttribute('data-personid', person._id);
             card.querySelector('.card-content').textContent = person.name + '\n' + person.birthDate +  '\n' + person.gifts;
             card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
@@ -114,12 +119,13 @@ export const personList = {
         ev.preventDefault();
         sessionStorage.setItem('GIFTR-PersonID', ev.currentTarget.getAttribute('data-personid'));
         pubsub.publish('loadGifts', true);
+        window.location.href = '../pages/gifts.html';
     },
 
     //callback function to delete the selected person
     deletePerson: ev =>{
         ev.preventDefault();
-        let id = ev.target.getAttribute('data-personid'); //get the id from the button
+        let id = ev.currentTarget.getAttribute('data-personid'); //get the id from the button
         // console.log();
         let req = giftrRequests.send('DELETE', `/api/people/${id}`, null, false, true);
 

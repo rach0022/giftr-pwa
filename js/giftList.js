@@ -24,6 +24,8 @@ export const giftList = {
 
         //subscribe to any events needed
         pubsub.subscribe('loadGifts', giftList.loadPage);
+        pubsub.publish('loginStatus', true); //CHANGE THIS
+        pubsub.publish('loadGifts', true); //CHANGE THIS
     },
 
     loadPage: needGifts =>{
@@ -31,9 +33,9 @@ export const giftList = {
         if(needGifts){
 
             //get the person id and or send them back
-            let personId = sessionStorage.getItem('GIFTR-PersonID') || null;
+            giftList.personId = sessionStorage.getItem('GIFTR-PersonID') || null;
 
-            if(!personId){
+            if(!giftList.personId){
                 console.log('How did you get here hacker, run away while you can')
             }
 
@@ -42,7 +44,7 @@ export const giftList = {
             document.getElementById('addGift').classList.remove('hide');
 
             //create the request and fetch the gifts
-            let req = giftrRequests.send('GET', `/api/people/${personId}/gifts`, null, false, true);
+            let req = giftrRequests.send('GET', `/api/people/${giftList.personId}/`, null, false, true);
 
             if(req){
                 giftList.fetchGifts(req);
@@ -54,15 +56,18 @@ export const giftList = {
     //make the actual fetch in this helper function
     fetchGifts: req =>{
         fetch(req)
-            .then(res => res.json())
+            .then(res => {
+                console.log(res);
+                return res.json();
+            })
             .then(data =>{
                 if(data.errors){
                     console.log('error fetching data');
                     M.toast({html: 'error fetching gift list'});
                 }
                 if(data.data){
-                    M.toast({html: 'retrieved gift list'});
-                    return data.data
+                    // M.toast({html: 'retrieved gift list'});
+                    return data.data.gifts
                 }
             })
             .then(gifts =>{
@@ -78,30 +83,33 @@ export const giftList = {
     buildGiftCards: gifts =>{
         let template = document.getElementById('cardTemplate');
         let frag = document.createDocumentFragment();
-
+        if(gifts.length == 0) console.log('you did it!');
         gifts.forEach(gift =>{
-            console.log(person);
+            console.log(gift);
             let card = template.content.cloneNode(true); //get the card
 
             //set the content and attributes for the card
-            card.querySelector('.card').setAttribute('data-personid', person._id);
+            card.querySelector('.card').setAttribute('data-giftid', gift._id);
+            if(gift.imageUrl){
+                card.querySelector('img').src = gift.imageUrl; 
+            }
+            card.querySelector('.card-title').textContent = gift.name;
             card.querySelector('.card-content').textContent = 
-                `Name: ${gift.name}
-                 price: ${gift.price}
+                `Price: ${gift.price}
                  StoreName: ${gift.store.name}
                  StoreURL: ${gift.store.productURL}
                  imageURL: ${gift.imageUrl}`;
-            card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
+            card.querySelector('.deleteGift').setAttribute('data-giftid', gift._id);
 
 
             //set the event listeners for the buttons (show person/ delete)
-            card.querySelector('.editGifts').addEventListener('click', giftList.editGift);
+            card.querySelector('.editGift').addEventListener('click', giftList.editGift);
             card.querySelector('.deleteGift').addEventListener('click', giftList.deleteGift);
 
             //append the card to the ul
             frag.appendChild(card);
         })
-        document.getElementById('personList').appendChild(frag);
+        document.getElementById('giftList').appendChild(frag);
     },
 
     editGift: ev => {
@@ -110,9 +118,9 @@ export const giftList = {
 
     deleteGift: ev =>{
         ev.preventDefault();
-        let id = ev.target.getAttribute('data-giftid'); //get the id from the button
-        // console.log();
-        let req = giftrRequests.send('DELETE', `/api/people/${personId}/gifts/${id}`, null, false, true);
+        let id = ev.currentTarget.getAttribute('data-giftid'); //get the id from the button
+        console.log(id);
+        let req = giftrRequests.send('DELETE', `/api/people/${giftList.personId}/gifts/${id}`, null, false, true);
 
         fetch(req)
             .then(res => res.json())

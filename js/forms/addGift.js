@@ -45,10 +45,10 @@ export const addGiftForm = {
         let store = {}; //create an empty object to hold the store values
 
         let name = form.querySelector('#name-gift').value;
-        let price = form.querySelector('#name-gift').value;
-        store.name = form.querySelector('#name-gift').value;
-        store.productURL = form.querySelector('#name-gift').value;
-        let imageUrl = form.querySelector('#name-gift').value;
+        let price = parseInt(form.querySelector('#price-gift').value);
+        store.name = form.querySelector('#storename-gift').value;
+        store.productURL = form.querySelector('#storeURL-gift').value;
+        let imageUrl = form.querySelector('#imageURL-gift').value;
 
         let req = giftrRequests.send(
             'POST', 
@@ -57,6 +57,7 @@ export const addGiftForm = {
             true,
             true
         );
+        console.log(req);
         
         if(req){
             fetch(req)
@@ -71,7 +72,7 @@ export const addGiftForm = {
                 })
                 .then(data =>{
                     console.log(data);
-                    pubsub.publish('loginStatus', true); //will change this later
+                    pubsub.publish('loadGifts', true); //will change this later
                     ui.closeSidenav(form);
                 })
                 .catch(err => console.error(err));

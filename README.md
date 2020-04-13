@@ -22,7 +22,13 @@
 - [x] Form for login (needs email, password) buttons: submit, cancel
 - [ ] Form for change password (needs new password) buttons: submit, cancel
 - [ ] Forms are side navs that can get pulled out, possibly done as a template to render them using pub sub methodology
-- [ ] forms for add person or gift, should slide down from under and be shown once a user clicks a button 
+- [ ] forms for add person or gift, should slide down from under and be shown once a user clicks a button
+
+### Images to Design:
+- [ ] Empty Person Silhouette to use when no image URL is defined
+- [ ] Gift Picture to use when no gift.imageUrl is provided
+- [ ] Icon for the PWA App in all the sizes needed (sizes to come)
+- [ ]
 
 ### Reminders: 
 - Make sure to init side navs for right and left side seperately. maybe just init inside each seperate module
@@ -31,3 +37,5 @@
 
 ### Bugs: 
 - [x] Fix login and signup links dissapearing on larger screens (possibly just a materialize class) || add class show-on-large to links in nav to see on larger screens
+- [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it
+- [x] price for gift is always null when sent

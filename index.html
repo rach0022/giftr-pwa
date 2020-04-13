@@ -134,6 +134,13 @@
                         <label for="birthdate-person"></label>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">insert_photo</i>
+                        <input type="url" id="imageUrl-person">
+                        <label for="imageUrl-person"></label>
+                    </div>
+                </div>
                 <a href="#" class="waves-effect waves-light btn s6" id="submit_person"><i class="material-icons">add</i></a>
                 <a href="#" class="waves-effect waves-light btn s6" id="cancel_person"><i class="material-icons">remove</i></a>
             </form>
@@ -168,11 +175,15 @@
 
 <!-- card template  (could be for person list or gift list)-->
 <template id="cardTemplate">
-    <div class="card horizontal col s10 offset-s1">
+    <div class="card col s10 offset-s1">
         <div class="card-stacked">
+            <div class="card-image center">
+                <img src="./res/img/star.png">
+                <span class="card-title"><p class="subheader">Title</p></span>
+            </div>
             <div class="card-content center"></div>
             <div class="card-action">
-                <div class="row center">
+                <div class="column center">
                     <a href="#" class="waves-effect waves-light btn s6 showGifts"><i class="material-icons">redeem</i></a>
                     <a href="#" class="waves-effect waves-light btn s6 deletePerson"><i class="material-icons">remove</i></a>
                 </div>

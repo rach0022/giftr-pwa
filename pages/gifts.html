@@ -56,9 +56,8 @@
 <!-- template for gift rendered in main -->
 <template id="giftListTemplate">
     <div  id="giftList" class="row">
-        <h3>User is not logged in, please log in to access our full app</h3>
     </div>
-    <div class="fixed-action-btn hide" id="addGift">
+    <div class="fixed-action-btn" id="addGift">
         <a href="#" class="btn-floating btn-large green sidenav-trigger" data-target="addGiftForm">
             <i class="large material-icons">add</i>
         </a>
@@ -67,7 +66,11 @@
 
 <!-- card template  (could be for person list or gift list)-->
 <template id="cardTemplate">
-    <div class="card horizontal col s10 offset-s1">
+    <div class="card col s10 offset-s1">
+        <div class="card-image center">
+            <img src="../res/img/star.png">
+            <span class="card-title black"></span>
+        </div>
         <div class="card-stacked">
             <div class="card-content center"></div>
             <div class="card-action">
@@ -104,21 +107,21 @@
                     <div class="input-field col s12">
                         <i class="material-icons prefix">store</i>
                         <input type="text" id="storename-gift">
-                        <label for="storename-gift"></label>
+                        <label for="storename-gift">Store Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">http</i>
                         <input type="url" id="storeURL-gift">
-                        <label for="storeURL-gift"></label>
+                        <label for="storeURL-gift">Store URL</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">insert_photo</i>
                         <input type="url" id="imageURL-gift">
-                        <label for="imageURL-gift"></label>
+                        <label for="imageURL-gift">Image URL</label>
                     </div>
                 </div>
                 <a href="#" class="waves-effect waves-light btn s6" id="submit_gift"><i class="material-icons">add</i></a>
