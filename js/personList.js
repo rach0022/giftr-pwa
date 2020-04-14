@@ -143,9 +143,9 @@ export const personList = {
                 if(birthCheck){
                     item.querySelector('.collection-item').classList.add(birthCheck);
                     let badge = document.createElement('span');
-                    badge.classList.add('red', 'badge', 'center');
+                    badge.classList.add('red', 'badge', 'center', 'white-text');
                     badge.textContent = 'birthday past';
-                    item.querySelector('.secondary-content').appendChild(badge);
+                    item.querySelector('.avatar').appendChild(badge);
                 }
 
                 //set the listeners

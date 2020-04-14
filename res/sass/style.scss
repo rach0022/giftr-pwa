@@ -9,3 +9,10 @@
     max-height: 100%; //increase modal height to support form content
     overflow: visible;
 }
+
+.badge{
+    position: relative;
+    max-height: 20px;
+    top: 4px;
+    @include center(row);
+}

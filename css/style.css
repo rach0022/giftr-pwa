@@ -37,4 +37,14 @@
   overflow: visible;
 }
 
+.badge {
+  position: relative;
+  max-height: 20px;
+  top: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 /*# sourceMappingURL=style.css.map */
