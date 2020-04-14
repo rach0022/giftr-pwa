@@ -15,6 +15,7 @@ import {ui} from './ui.js';
 export const giftList = {
     personId: null, //container for the person id stored in session storage
     emptyMessage: 'You have no gifts added, press the green button to add',
+    defaultImageSrc: '../res/img/noIdeaPic.png',
     render: container =>{
         let template = document.getElementById('giftListTemplate');
         // let template = document.getElementById('giftListTemplate');
@@ -110,7 +111,7 @@ export const giftList = {
                 if(gift.imageUrl){
                     item.querySelector('img').src = gift.imageUrl;
                 } else {
-                    item.querySelector('img').src = '../res/img/star.png';
+                    item.querySelector('img').src = giftList.defaultImageSrc;
                 }
                 text.textContent = `Price: ${ui.formatCurrency(gift.price)} Store: `;
 
