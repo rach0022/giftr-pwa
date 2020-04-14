@@ -34,7 +34,7 @@
 - [ ] Empty Person Silhouette to use when no image URL is defined
 - [ ] Gift Picture to use when no gift.imageUrl is provided
 - [ ] Icon for the PWA App in all the sizes needed (sizes to come)
-- [ ]
+- [ ] SVG Loader Icon
 
 ### Reminders: 
 - Make sure to init side navs for right and left side seperately. maybe just init inside each seperate module

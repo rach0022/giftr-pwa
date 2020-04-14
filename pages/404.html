@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' ; 
+            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com ;
+            script-src 'self' 'unsafe-inline';
+            font-src 'self' https://fonts.gstatic.com;
+            media-src 'self' ;
+            connect-src 'self' https://giftr.mad9124.rocks/auth/ https://giftr.mad9124.rocks/api/ ;
+            img-src 'self' ; "
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIFTR-PWA</title>
+    <link rel="shortcut icon" href="./res/img/favicon.ico" type="image/x-icon">
+    <!-- materialize css library  -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link rel="stylesheet" href="../css/materialize.min.css" />
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- pwa manifest and android support (theme color) -->
+    <!-- ios support  -->
+  </head>
+  <body>
+    <nav></nav>
+        <h3 class="center">Error Occured</h3>
+        <h3 class="center"><i class="material-icons large">error</i></h3>
+        <h3 class="center"><a href="/index.html">Home</a></h3> 
+
+    </main>
+    <script src="../js/materialize.min.js"></script>
+    <script type="module">
+        import {ui} from '../js/ui.js';
+        import {nav} from '../js/nav.js';
+        import {signInForm} from '../js/forms/signIn.js';
+        import {signUpForm} from '../js/forms/signUp.js';
+
+        document.addEventListener('DOMContentLoaded', ev =>{
+            //render all the initial containers
+            nav.render(document.querySelector('nav'));
+            signInForm.render(document.body);
+            signUpForm.render(document.body);
+            ui.initModal('errorModal'); //init err modal
+        })
+    </script>
+</body>
+</html>
+
+<!-- start of template definitions -->
+<!-- the template for the header navigation  -->
+<template id="mainNavigation">
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">GIFTR</a>
+        <ul id="loginNav" class="right">
+            <li><a href="#" data-target="loginForm" class="sidenav-trigger show-on-large">Login</a></li>
+        </ul>
+        <ul id="signupNav" class="left">
+            <li><a href="#" data-target="signupForm" class="sidenav-trigger show-on-large">Signup</a></li>
+        </ul>
+        <ul id="profileNav" class="right hide">
+            <li><a href="#" data-target="profileSlideout" class="sidenav-trigger show-on-large"><i class="material-icons prefix">account_circle</i></a></li>
+        </ul>
+    </div>
+</template>
+
+<!-- template for profile side nav -->
+<template id="profileTemplate">
+    <ul id="profileSlideout" class="sidenav">
+        <div class="row">
+            <li><a href="#" class="header center">Your Profile</a></li>
+            <li><a href="#" class="subheader fname">First Name: </a></li>
+            <li><a href="#" class="subheader lname">Last Name: </a></li>
+            <li><a href="#" class="subheader email">Email: </a></li>
+            <li><a href="#" id="signout" class="waves-effect eaves-light btn col s10 offset-s1">Sign Out</a></li>
+        </div>
+    </ul>
+</template>
+
+<!-- temmplates i may not need  -->
+<!-- the template for the sigin form  (append to the body)-->
+<template id="loginFormTemplate">
+    <ul id="loginForm" class="sidenav">
+        <li><a class="subheader center">Sign In</a></li>
+        <div class="row">
+            <form action="" class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input type="email" id="email-login" class="validate">
+                        <label for="email-login">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">security</i>
+                        <input type="password" id="password-login" class="validate">
+                        <label for="password-login">Password</label>
+                    </div>
+                </div>
+                <div class="row center">
+                    <a href="#" class="waves-effect waves-light btn s6" id="submit_login"><i class="material-icons">send</i>Submit</a>
+                    <a href="#" class="waves-effect waves-light btn s6" id="cancel_login"><i class="material-icons">cancel</i> Cancel</a>
+                </div>
+            </form>
+        </div>
+    </ul>
+</template>
+
+<!-- signup form template  -->
+<template id="signupFormTemplate">
+    <ul id="signupForm" class="sidenav">
+        <li><a class="subheader center">Sign Up</a></li>
+        <div class="row">
+            <form action="" class="col s12">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                        <input type="text" id="firstname-signup" class="validate">
+                        <label for="firstname-signup">First Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                        <input type="text" id="lastname-signup" class="validate">
+                        <label for="lastname-signup">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input type="email" id="email-signup" class="validate">
+                        <label for="email-signup">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">security</i>
+                        <input type="password" id="password-signup" class="validate">
+                        <label for="password-signup">Password</label>
+                    </div>
+                </div>
+                <div class="row center">
+                    <a href="#" class="waves-effect waves-light btn s6" id="submit_signup"><i class="material-icons">send</i>Submit</a>
+                    <a href="#" class="waves-effect waves-light btn s6" id="cancel_signup"><i class="material-icons">cancel</i> Cancel</a>
+                </div>
+            </form>
+        </div>
+    </ul>
+</template>
