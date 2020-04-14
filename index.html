@@ -13,7 +13,7 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFTR-PWA</title>
-    <link rel="shortcut icon" href="./res/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
     <!-- materialize css library  -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="./css/materialize.min.css">
@@ -51,10 +51,10 @@
     <div class="nav-wrapper">
         <a href="/" class="brand-logo center">GIFTR</a>
         <ul id="loginNav" class="right">
-            <li><a href="#" data-target="loginForm" class="sidenav-trigger show-on-large">Login</a></li>
+            <li><a href="#" data-target="loginForm" class="modal-trigger show-on-large">Login</a></li>
         </ul>
         <ul id="signupNav" class="left">
-            <li><a href="#" data-target="signupForm" class="sidenav-trigger show-on-large">Signup</a></li>
+            <li><a href="#" data-target="signupForm" class="modal-trigger show-on-large">Signup</a></li>
         </ul>
         <ul id="profileNav" class="right hide">
             <li><a href="#" data-target="profileSlideout" class="sidenav-trigger show-on-large"><i class="material-icons prefix">account_circle</i></a></li>
@@ -64,9 +64,9 @@
 
 <!-- the template for the sigin form  (append to the body)-->
 <template id="loginFormTemplate">
-    <ul id="loginForm" class="sidenav">
-        <li><a class="subheader center">Sign In</a></li>
-        <div class="row">
+    <ul id="loginForm" class="modal">
+        <h4 class="center">Sign In</h4>
+        <div class="modal-content">
             <form action="" class="col s12">
                 <div class="row">
                     <div class="input-field col s12">
@@ -82,54 +82,57 @@
                         <label for="password-login">Password</label>
                     </div>
                 </div>
-                <div class="row center">
-                    <a href="#" class="waves-effect waves-light btn s6" id="submit_login"><i class="material-icons">send</i>Submit</a>
-                    <a href="#" class="waves-effect waves-light btn s6" id="cancel_login"><i class="material-icons">cancel</i> Cancel</a>
-                </div>
             </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="waves-effect waves-light btn s6" id="submit_login"><i class="material-icons">send</i>Submit</a>
+            <a href="#" class="waves-effect waves-light btn s6" id="cancel_login"><i class="material-icons">cancel</i> Cancel</a>
         </div>
     </ul>
 </template>
 
 <!-- signup form template  -->
 <template id="signupFormTemplate">
-    <ul id="signupForm" class="sidenav">
-        <li><a class="subheader center">Sign Up</a></li>
-        <div class="row">
-            <form action="" class="col s12">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">person</i>
-                        <input type="text" id="firstname-signup" class="validate">
-                        <label for="firstname-signup">First Name</label>
+    <div id="signupForm" class="modal">
+        <div class="modal-content">
+            <h4 class="center">Sign Up</h4>
+            <div class="row">
+                <form action="" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">person</i>
+                            <input type="text" id="firstname-signup" class="validate">
+                            <label for="firstname-signup">First Name</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">person</i>
-                        <input type="text" id="lastname-signup" class="validate">
-                        <label for="lastname-signup">Last Name</label>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">person</i>
+                            <input type="text" id="lastname-signup" class="validate">
+                            <label for="lastname-signup">Last Name</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">email</i>
-                        <input type="email" id="email-signup" class="validate">
-                        <label for="email-signup">Email</label>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">email</i>
+                            <input type="email" id="email-signup" class="validate">
+                            <label for="email-signup">Email</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <i class="material-icons prefix">security</i>
-                        <input type="password" id="password-signup" class="validate">
-                        <label for="password-signup">Password</label>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">security</i>
+                            <input type="password" id="password-signup" class="validate">
+                            <label for="password-signup">Password</label>
+                        </div>
                     </div>
-                </div>
-                <div class="row center">
-                    <a href="#" class="waves-effect waves-light btn s6" id="submit_signup"><i class="material-icons">send</i>Submit</a>
-                    <a href="#" class="waves-effect waves-light btn s6" id="cancel_signup"><i class="material-icons">cancel</i> Cancel</a>
-                </div>
-            </form>
+                    
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="waves-effect waves-light btn s6" id="submit_signup"><i class="material-icons">send</i>Submit</a>
+            <a href="#" class="waves-effect waves-light btn s6" id="cancel_signup"><i class="material-icons">cancel</i> Cancel</a>
         </div>
     </ul>
 </template>

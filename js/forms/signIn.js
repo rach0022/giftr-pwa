@@ -27,7 +27,7 @@ export const signInForm = {
         //instantiate the materialize events for side navs (taken from materialize docs)
         // let instances = document.querySelectorAll('#loginForm');
         // M.Sidenav.init(instances, {edge: "right"});
-        ui.initSidenav('loginForm', 'right');
+        ui.initModal('loginForm', {opacity: '0.5'});
 
         //subscribe to any pubsub events needed
     },
@@ -45,7 +45,7 @@ export const signInForm = {
             fetch(req)
                 .then(res => res.json())
                 .then(res => {
-                    ui.closeSidenav(form);
+                    ui.closeModal(form);
                     console.log(res);
                     if (res.errors){
                         // console.log("signin failed");
@@ -79,6 +79,6 @@ export const signInForm = {
         let form = document.getElementById('loginForm');
         form.querySelector('form').reset();
         //get the instace of the form from Materialize:
-        ui.closeSidenav(form);
+        ui.closeModal(form);
     }
 };

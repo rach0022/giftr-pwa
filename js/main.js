@@ -25,22 +25,19 @@ let giftr = {
         let token = sessionStorage.getItem('GIFTR-UserToken') || null;
         let url = window.location.href;
 
+        //render all the initial containers (navigation bar and signup/in modals)
+        nav.render(document.querySelector('nav'));
+        signInForm.render(document.body);
+        signUpForm.render(document.body);
+
         //now conditionally check which file we are connected too and launch the right modules
         if(url.indexOf('gifts.html') > -1){
-            //render all the initial containers
-            nav.render(document.querySelector('nav'));
-            signInForm.render(document.body);
-            signUpForm.render(document.body);
             giftList.render(document.querySelector('main'));
             addGiftForm.render(document.body);
         } else if (url.indexOf('404.html') > -1){
-            nav.render(document.querySelector('nav'));
-            signInForm.render(document.body);
-            signUpForm.render(document.body);
-        } else { //fallback on index.html because the url wont show that part sometimes
-            nav.render(document.querySelector('nav'));
-            signInForm.render(document.body);
-            signUpForm.render(document.body);
+            console.log('We are on the Error Page');
+        } else {
+            //fallback on index.html because the url wont show that part sometimes
             personList.render(document.querySelector('main'));
             addPersonForm.render(document.body);
         }

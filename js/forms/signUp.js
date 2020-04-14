@@ -24,7 +24,9 @@ export const signUpForm = {
         container.appendChild(form);
 
         //instantiate in the container
-        ui.initSidenav('signupForm', 'left')
+        // ui.initSidenav('signupForm', 'left');
+        ui.initModal('signupForm', {opacity: '0.5'});
+
 
         //subscribe to any pubsub events needed
     },
@@ -55,7 +57,7 @@ export const signUpForm = {
             fetch(req)
                 .then(res =>res.json())
                 .then(data => {
-                    ui.closeSidenav(form);
+                    ui.closeModal(form);
                     console.log(data)
                     if(data.errors){
                         // console.log('there was an error signing up');
@@ -80,7 +82,7 @@ export const signUpForm = {
         
         let form = document.querySelector('#signupForm');
         form.querySelector('form').reset();
-        ui.closeSidenav(form);
+        ui.closeModal(form);
         
     }
 };
