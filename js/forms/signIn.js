@@ -48,11 +48,11 @@ export const signInForm = {
                     ui.closeSidenav(form);
                     console.log(res);
                     if (res.errors){
-                        console.log("signin failed");
-                        M.toast({html: 'signin failed'});
+                        // console.log("signin failed");
+                        // M.toast({html: 'signin failed'});
+                        giftrRequests.error(res.errors);
 
-                    }
-                    if(res.data.token){
+                    }else if(res.data.token){
                         console.log(res.data.token);
                         M.toast({html: 'signin success'});
                         sessionStorage.setItem('GIFTR-UserToken', 'Bearer ' +  res.data.token);

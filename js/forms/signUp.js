@@ -58,9 +58,9 @@ export const signUpForm = {
                     ui.closeSidenav(form);
                     console.log(data)
                     if(data.errors){
-                        console.log('there was an error signing up');
-                        M.toast({html: 'signup failed'});
-
+                        // console.log('there was an error signing up');
+                        // M.toast({html: 'signup failed'});
+                        giftrRequests.error(data.errors);
                     }
                     if(data.data){
                         M.toast({html: 'signup success'});

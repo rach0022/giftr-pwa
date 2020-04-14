@@ -9,6 +9,7 @@
 ***********************/
 
 import {pubsub} from './pubsub.js';
+import {ui} from './ui.js';
 import {nav} from './nav.js';
 import {signInForm} from './forms/signIn.js';
 import {signUpForm} from './forms/signUp.js';
@@ -23,6 +24,9 @@ let giftPage = {
         signUpForm.render(document.body);
         giftList.render(document.querySelector('main'));
         addGiftForm.render(document.body);
+
+        //init err modal
+        ui.initModal('errorModal');
     }
 }
 

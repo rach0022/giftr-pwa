@@ -47,8 +47,9 @@ export const addPersonForm = {
                 .then(res => res.json())
                 .then(data => {
                     if(data.errors){
-                        M.toast({html: 'error adding person'});
-                        console.log('error sending person', data.errors)
+                        // M.toast({html: 'error adding person'});
+                        giftrRequests.error(data.errors);
+                        // console.log('error sending person', data.errors, data.errors[0])
                     } else if (data.data){
                         return data.data
                     }

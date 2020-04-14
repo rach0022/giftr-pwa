@@ -9,6 +9,7 @@
 ***********************/
 
 import { pubsub } from "./pubsub.js";
+import { ui } from "./ui.js";
 export const giftrRequests = {
     //the base url for the app, could be localhost or giftr api
     // baseURL: 'http://localhost:3030',
@@ -93,6 +94,19 @@ export const giftrRequests = {
     //send error: when we encouter an error with authroization or creating the request send this error
     error: info =>{
         console.log('Non fatal error occured:', info);
-        return null; //return null so we know we dont have a request built
+
+        //get the modal ref
+        let errMod = document.getElementById('errorModal');
+        M.initModal
+        let errModCollection = document.querySelector('#errorModal .collection');
+        errModCollection.innerHTML = "";
+
+        info.forEach(err =>{
+            let item = document.createElement('li');
+            item.classList.add('collection-item', 'red-text', 'center');
+            item.textContent = `${err.code} ${err.title} - ${err.detail}`
+            errModCollection.appendChild(item);
+        })
+        M.Modal.getInstance(errMod).open();
     }
 }

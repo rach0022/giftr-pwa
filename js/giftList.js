@@ -27,8 +27,13 @@ export const giftList = {
 
         //subscribe to any events needed
         pubsub.subscribe('loadGifts', giftList.loadPage);
-        pubsub.publish('loginStatus', true); //CHANGE THIS
-        pubsub.publish('loadGifts', true); //CHANGE THIS
+        if(sessionStorage.getItem('GIFTR-UserToken')){
+            pubsub.publish('loginStatus', true); //CHANGE THIS
+            pubsub.publish('loadGifts', true); //CHANGE THIS
+        } else {
+            window.location.href = '/index.html';
+        }
+        
     },
 
     loadPage: needGifts =>{

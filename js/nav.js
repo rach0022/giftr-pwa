@@ -111,6 +111,7 @@ export const nav = {
         ui.closeSidenav(document.getElementById('profileSlideout'));
 
         //tell the user
+        window.location.href = '/index.html';
         M.toast({html: 'logged out'})
     }
 };

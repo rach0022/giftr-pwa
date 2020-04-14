@@ -64,8 +64,7 @@ export const addGiftForm = {
                 .then(res => res.json())
                 .then(data => {
                     if(data.errors){
-                        M.toast({html: 'error adding gift'});
-                        console.log('error sending person', data.errors)
+                        giftrRequests.error(data.errors);
                     } else if (data.data){
                         
                     }
