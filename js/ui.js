@@ -41,7 +41,7 @@ export const ui = {
 
     //helper function to format the date to only get the month and day (who cares about year)
     formatDate: date =>{
-        let newDate = ui.parseDate(date);
+        let newDate = ui.parseDate(date).setUTCHours(16);
         let opts = {
             month: 'short',
             day: 'numeric'

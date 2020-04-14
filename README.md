@@ -46,4 +46,4 @@
 - [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it || fixed everything except for imageURL for gifts, ask steve
 - [x] price for gift is always null when sent
 - [x] sort birthday is not working
-- [ ] figure out why date formatted is always one day before the actual date given
+- [x] figure out why date formatted is always one day before the actual date given | solution: setUTCHours(>1) so to say it is past midnight
