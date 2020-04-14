@@ -14,7 +14,7 @@ import {ui} from './ui.js';
 
 export const personList = {
     emptyMessage: 'You Have no Friends Added, please press the green button to add a friend',
-    defaultImageSrc: '../res/img/noProfilePic.png',
+    defaultImageSrc: '../img/noProfilePic.png',
     //render the person list in whatever contaienr sepecified
     render: container =>{
         //get/clone the template

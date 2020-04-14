@@ -15,7 +15,7 @@ import {ui} from './ui.js';
 export const giftList = {
     personId: null, //container for the person id stored in session storage
     emptyMessage: 'You have no gifts added, press the green button to add',
-    defaultImageSrc: '../res/img/noIdeaPic.png',
+    defaultImageSrc: '../img/noIdeaPic.png',
     render: container =>{
         let template = document.getElementById('giftListTemplate');
         // let template = document.getElementById('giftListTemplate');

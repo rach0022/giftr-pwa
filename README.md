@@ -31,10 +31,20 @@
 - [ ] forms for add person or gift, should slide down from under and be shown once a user clicks a button
 
 ### Images to Design:
-- [ ] Empty Person Silhouette to use when no image URL is defined
-- [ ] Gift Picture to use when no gift.imageUrl is provided
-- [ ] Icon for the PWA App in all the sizes needed (sizes to come)
+- [x] Empty Person Silhouette to use when no image URL is defined
+- [x] Gift Picture to use when no gift.imageUrl is provided
+- [x] Icon for the PWA App in all the sizes needed (sizes to come)
 - [ ] SVG Loader Icon
+
+### To Do To Convert to PWA: 
+- [ ] Add PWA requirements to the head of the html pages (404.html, gifts.html, index.html)
+- [ ] Create a manifest.json that links to all icons made
+- [ ] Create a service worker (sw.js) with a global scope and register it in one of the main modules (main.js/ app.js)
+- [ ] Allow a service worker to cache requests and display them to the user when offline
+- [ ] Manage the install process of a pwa by following: https://prof3ssorst3v3.github.io/mad9022/modules/week11/install.html
+- [ ] BONUS: you can earn a bonus 5% if you use IndexedDB and the idb-keyval library to save requests for Deleting existing people and gifts or Adding new people or gifts when the user is offline. (https://www.npmjs.com/package/idb-keyval)
+- [ ] BONUS: You can earn another 5% if you are able to take any data out of IndexedDB and send it to the API when the the network connection is re-established.
+
 
 ### Reminders: 
 - Make sure to init side navs for right and left side seperately. maybe just init inside each seperate module
