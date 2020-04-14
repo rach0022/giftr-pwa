@@ -32,20 +32,7 @@
 
     </main>
     <script src="../js/materialize.min.js"></script>
-    <script type="module">
-        import {ui} from '../js/ui.js';
-        import {nav} from '../js/nav.js';
-        import {signInForm} from '../js/forms/signIn.js';
-        import {signUpForm} from '../js/forms/signUp.js';
-
-        document.addEventListener('DOMContentLoaded', ev =>{
-            //render all the initial containers
-            nav.render(document.querySelector('nav'));
-            signInForm.render(document.body);
-            signUpForm.render(document.body);
-            ui.initModal('errorModal'); //init err modal
-        })
-    </script>
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>
 

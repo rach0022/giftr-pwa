@@ -4,7 +4,7 @@
 *
 *  @author Ravi Chandra Rachamalla rach0022@algonquinlive.com
 *
-*  @version Apr 11, 2020
+*  @version Apr 14, 2020
 *
 ***********************/
 
@@ -14,21 +14,36 @@ import {nav} from './nav.js';
 import {signInForm} from './forms/signIn.js';
 import {signUpForm} from './forms/signUp.js';
 import {personList} from './personList.js';
-import {addPersonForm} from './forms/addPerson.js'
+import {addPersonForm} from './forms/addPerson.js';
+import {giftList} from './giftList.js';
+import {addGiftForm} from './forms/addGift.js';
 
 let giftr = {
     init: ev => {
         
         //check if the user is logged in:
         let token = sessionStorage.getItem('GIFTR-UserToken') || null;
+        let url = window.location.href;
 
-
-        //render all the initial containers
-        nav.render(document.querySelector('nav'));
-        signInForm.render(document.body);
-        signUpForm.render(document.body);
-        personList.render(document.querySelector('main'));
-        addPersonForm.render(document.body);
+        //now conditionally check which file we are connected too and launch the right modules
+        if(url.indexOf('gifts.html') > -1){
+            //render all the initial containers
+            nav.render(document.querySelector('nav'));
+            signInForm.render(document.body);
+            signUpForm.render(document.body);
+            giftList.render(document.querySelector('main'));
+            addGiftForm.render(document.body);
+        } else if (url.indexOf('404.html') > -1){
+            nav.render(document.querySelector('nav'));
+            signInForm.render(document.body);
+            signUpForm.render(document.body);
+        } else { //fallback on index.html because the url wont show that part sometimes
+            nav.render(document.querySelector('nav'));
+            signInForm.render(document.body);
+            signUpForm.render(document.body);
+            personList.render(document.querySelector('main'));
+            addPersonForm.render(document.body);
+        }
 
         //tell the modules if user is logged in or not
         if(token) {
@@ -37,38 +52,8 @@ let giftr = {
             pubsub.publish('loginStatus', false); //tell the other modules if the user is not logged in
         }
         ui.initModal('errorModal'); //init the error modal
-    },
-    testAPI: (method, url, body) =>{
-        //test the log in method see if we get back a token to put in session storage
 
-        //test Person API
-
-        //test GIFT API
-
-        //test Auth API
-
-        //now use the Bearer token in session storage to get the user info
-        // document.getElementById('get_login').addEventListener('click', ev =>{
-        //     ev.preventDefault();
-        //     let req = giftrRequests.send('GET', '/auth/users/me/', null, false, true);
-        //     if(req){ //if we have request and not null do the fetch
-        //         console.log(req);
-        //         fetch(req)
-        //             .then(res => {
-        //                 if(res.ok){
-        //                     return res.json()
-        //                 }
-        //             })
-        //             .then(resp => {
-        //                 let data = resp.data;
-        //                 console.log(data.email, data._id, data.firstName, data.lastName, data);
-        //             })
-        //             .catch(err =>{
-        //                 console.error(err);
-        //         });
-        //     }
-            
-        // });
+        
     }
 };
 

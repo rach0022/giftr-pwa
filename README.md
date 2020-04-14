@@ -47,3 +47,4 @@
 - [x] price for gift is always null when sent
 - [x] sort birthday is not working
 - [x] figure out why date formatted is always one day before the actual date given | solution: setUTCHours(>1) so to say it is past midnight
+- [ ] Figure out why Jan 1st is sorted as the last day of the year by my ui.Sort method
