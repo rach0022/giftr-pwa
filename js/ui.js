@@ -58,10 +58,12 @@ export const ui = {
 
     //helper function to add the protocol onto the link if it doesnt have it
     addProtocol: url =>{
+        //dont want to mutate the data so make a copy
+        let newURL = url
         if(url.substring(0,8) != 'https://' || url.substring(0,7) != 'http://'){
-            url = 'https://' + url
+            newURL =  'https://' + url
         }
-        return url;
+        return newURL;
     },
 
     //helper function to compare the current date vs the birthdate
