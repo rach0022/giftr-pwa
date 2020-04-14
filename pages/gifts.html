@@ -2,6 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' ; 
+            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com ;
+            script-src 'self' 'unsafe-inline';
+            font-src 'self' https://fonts.gstatic.com;
+            media-src 'self' ;
+            connect-src 'self' https://giftr.mad9124.rocks/auth/ https://giftr.mad9124.rocks/api/ ;
+            img-src 'self' ; "
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GIFTR-PWA</title>
     <link rel="shortcut icon" href="./res/img/favicon.ico" type="image/x-icon">
@@ -27,7 +36,7 @@
             </ul>
         </div>
     </div>
-    
+
     <!-- materialize js -->
     <script src="../js/materialize.min.js"></script>
     <script type="module" src="../js/gift.js"></script>
