@@ -1,6 +1,6 @@
 'use strict';
-const staticCacheName = 'static-cache-v10';
-const dynamicCacheName = 'dynamic-cache-v5';
+const staticCacheName = 'static-cache-v12';
+const dynamicCacheName = 'dynamic-cache-v7';
 const dynamicCacheSize = 50;
 const staticAssets = [
     '/',
@@ -97,58 +97,46 @@ function onFetch(ev){
     console.log('service worker observed a fetch at:', ev.request.url);
 
     // //now to actually handle that event with a cache first to online fallback
-    // ev.respondWith(
-    //     caches.match(ev.request).then(cacheRes => {
-    //         //we are checking all of the static and dynammic caches
-    //         //cacheRes could be undefined
 
-    //         //return the caches response or fetch the request
-    //         // console.log('CACHERES',cacheRes);
-    //         return (
-    //             cacheRes ||
-    //             fetch(ev.request).then(fetchRes =>{
-    //                 //if it wasnt in our cache and we didnt get a 404
-    //                 //open up our dynamic cache
-    //                 console.log('was not in cache', ev.request);
-    //                 if(fetchRes.status != 404){
-    //                     return caches.open(dynamicCacheName).then(cache =>{
-    //                         //cache the request if it does NOT come from our API
-    //                         //or it comes for our API and uses 'GET' (change this later with idb_keyvals)
-    //                         if(
-    //                             ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 ||
-    //                             (ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && 
-    //                             ev.request.method == 'GET')
-    //                         ){
-    //                             console.log('ADDING TO DYNAMIC CACHE', ev.request.url);
-    //                             //need to clone response to return the original response back to the browser
-    //                             cache.put(ev.request.url, fetchRes.clone());
-    //                             limitCacheSize(dynamicCacheName, dynamicCacheSize); //limit dynamic cache size
-    //                         }
-    //                         //check the headers for a content type for a custom respones
-    //                         return fetchRes;
-    //                     });
-    //                 } else {
-    //                     //failed to fetch
-    //                     console.log('fetch failed', fetchRes);
-    //                     throw new Error('failed to fetch');
-    //                 }
-    //             })
-    //         );
-    //     })
-    //         .catch(err =>{
-    //             //offline handler
-    //             console.warn(err); //failed to fetch
-    //             let url = new URL(ev.request.url);
-    //             console.log('failed url', url);
+    //rewriting the below code by formatted better:
+    ev.respondWith(
+        //check both the static and dynamic cache for the file
+        //if we get a cacheRes give that back or do the normal fetch
+        //if fetch fails then just go to our offline handler fallback in the catch
+        caches.match(ev.request).then(cacheRes =>{
+            return cacheRes || fetch(ev.request).then(fetchRes =>{
+                //if it wasnt in our cache and we didnt get a 404 status code open up the dynamic cache
+                console.log(ev.request, 'was not in cache');
+                if(fetchRes.status != 404){
+                    return caches.open(dynamicCacheName).then(cache =>{
+                        //cache the request if it does not come from our api
+                        //or it comes from our API and uses get
+                        if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 || 
+                        (ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 &&
+                        ev.request.method == 'GET')){
+                            console.log('adding to dynamic cache', ev.request.url);
+                            cache.put(ev.request.url, fetchRes.clone()); //cloning the response to still send it back to browser
+                            limitCacheSize(dynamicCacheName, dynamicCacheSize);
+                        }
+                        return fetchRes; //return the original response
+                    });
+                } else {
+                    //failed to fetch for another reason
+                    console.log('failed to fetch', fetchRes);
+                    throw new Error('failed to fetch');
+                }
+            })
+        }).catch(err =>{
+            let url = new URL(ev.request.url)
+            console.warn(err, 'failed URL:', url);
 
-    //             //if the failed request was going to an html page from our site
-    //             //send them to our cached 404 page
-    //             if(url.pathname.indexOf('.html') > -1){
-    //                 return caches.match('/pages/404.html');
-    //             }
-    //             return caches.match('/index.html');
-    //         })
-    // );
+            //check if we were trying to open an html page if so send them to index
+            if(url.pathname.indexOf('.html') > -1){
+                return caches.match('/pages/404.html');
+            }
+            //return caches.match('/index.html'); fallback if we cant load something else
+        })
+    );
 }
 
 //recieved a message from the webpage (maybe online/login status)
