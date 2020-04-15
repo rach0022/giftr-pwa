@@ -1,5 +1,5 @@
 'use strict';
-const staticCacheName = 'static-cache-v8';
+const staticCacheName = 'static-cache-v10';
 const dynamicCacheName = 'dynamic-cache-v5';
 const dynamicCacheSize = 50;
 const staticAssets = [
@@ -96,59 +96,59 @@ function onActivate(ev){
 function onFetch(ev){
     console.log('service worker observed a fetch at:', ev.request.url);
 
-    //now to actually handle that event with a cache first to online fallback
-    ev.respondWith(
-        caches.match(ev.request).then(cacheRes => {
-            //we are checking all of the static and dynammic caches
-            //cacheRes could be undefined
+    // //now to actually handle that event with a cache first to online fallback
+    // ev.respondWith(
+    //     caches.match(ev.request).then(cacheRes => {
+    //         //we are checking all of the static and dynammic caches
+    //         //cacheRes could be undefined
 
-            //return the caches response or fetch the request
-            // console.log('CACHERES',cacheRes);
-            return (
-                cacheRes ||
-                fetch(ev.request).then(fetchRes =>{
-                    //if it wasnt in our cache and we didnt get a 404
-                    //open up our dynamic cache
-                    console.log('was not in cache', ev.request);
-                    if(fetchRes.status != 404){
-                        return caches.open(dynamicCacheName).then(cache =>{
-                            //cache the request if it does NOT come from our API
-                            //or it comes for our API and uses 'GET' (change this later with idb_keyvals)
-                            if(
-                                ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 ||
-                                (ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && 
-                                ev.request.method == 'GET')
-                            ){
-                                console.log('ADDING TO DYNAMIC CACHE', ev.request.url);
-                                //need to clone response to return the original response back to the browser
-                                cache.put(ev.request.url, fetchRes.clone());
-                                limitCacheSize(dynamicCacheName, dynamicCacheSize); //limit dynamic cache size
-                            }
-                            //check the headers for a content type for a custom respones
-                            return fetchRes;
-                        });
-                    } else {
-                        //failed to fetch
-                        console.log('fetch failed', fetchRes);
-                        throw new Error('failed to fetch');
-                    }
-                })
-            );
-        })
-            .catch(err =>{
-                //offline handler
-                console.warn(err); //failed to fetch
-                let url = new URL(ev.request.url);
-                console.log('failed url', url);
+    //         //return the caches response or fetch the request
+    //         // console.log('CACHERES',cacheRes);
+    //         return (
+    //             cacheRes ||
+    //             fetch(ev.request).then(fetchRes =>{
+    //                 //if it wasnt in our cache and we didnt get a 404
+    //                 //open up our dynamic cache
+    //                 console.log('was not in cache', ev.request);
+    //                 if(fetchRes.status != 404){
+    //                     return caches.open(dynamicCacheName).then(cache =>{
+    //                         //cache the request if it does NOT come from our API
+    //                         //or it comes for our API and uses 'GET' (change this later with idb_keyvals)
+    //                         if(
+    //                             ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 ||
+    //                             (ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && 
+    //                             ev.request.method == 'GET')
+    //                         ){
+    //                             console.log('ADDING TO DYNAMIC CACHE', ev.request.url);
+    //                             //need to clone response to return the original response back to the browser
+    //                             cache.put(ev.request.url, fetchRes.clone());
+    //                             limitCacheSize(dynamicCacheName, dynamicCacheSize); //limit dynamic cache size
+    //                         }
+    //                         //check the headers for a content type for a custom respones
+    //                         return fetchRes;
+    //                     });
+    //                 } else {
+    //                     //failed to fetch
+    //                     console.log('fetch failed', fetchRes);
+    //                     throw new Error('failed to fetch');
+    //                 }
+    //             })
+    //         );
+    //     })
+    //         .catch(err =>{
+    //             //offline handler
+    //             console.warn(err); //failed to fetch
+    //             let url = new URL(ev.request.url);
+    //             console.log('failed url', url);
 
-                //if the failed request was going to an html page from our site
-                //send them to our cached 404 page
-                if(url.pathname.indexOf('.html') > -1){
-                    return caches.match('/pages/404.html');
-                }
-                return caches.match('/index.html');
-            })
-    );
+    //             //if the failed request was going to an html page from our site
+    //             //send them to our cached 404 page
+    //             if(url.pathname.indexOf('.html') > -1){
+    //                 return caches.match('/pages/404.html');
+    //             }
+    //             return caches.match('/index.html');
+    //         })
+    // );
 }
 
 //recieved a message from the webpage (maybe online/login status)

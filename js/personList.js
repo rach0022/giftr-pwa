@@ -91,33 +91,6 @@ export const personList = {
         let frag = document.createDocumentFragment();
 
         if(people.length > 0){
-            //go through everyone in the array and create the cards cloning the template
-            // people.forEach(person =>{
-            //     console.log(person);
-            //     let card = template.content.cloneNode(true); //get the card
-
-            //     //set any classes necessary like past
-            //     let birthCheck = ui.isBirthdayPast(person.birthDate);
-            //     if(birthCheck) card.querySelector('.card').classList.add(birthCheck); 
-
-            //     //set the content and attributes for the card
-            //     if(person.imageUrl){
-            //         card.querySelector('img').src = person.imageUrl; 
-            //     }
-            //     card.querySelector('.card-title').textContent = person.name;
-
-            //     card.querySelector('.card').setAttribute('data-personid', person._id);
-            //     card.querySelector('.card-content').textContent = ui.formatDate(person.birthDate);
-            //     card.querySelector('.deletePerson').setAttribute('data-personid', person._id);
-            //     card.querySelector('.showGifts').setAttribute('data-personid', person._id);
-
-            //     //set the event listeners for the buttons (show person/ delete)
-            //     card.querySelector('.showGifts').addEventListener('click', personList.showGifts);
-            //     card.querySelector('.deletePerson').addEventListener('click', personList.deletePerson);
-
-            //     //append the card to the ul
-            //     frag.appendChild(card);
-            // });
             people.forEach(person =>{
                 let item = template.content.cloneNode(true);
                 let del_btn = item.querySelector('.deletePerson');
@@ -132,8 +105,8 @@ export const personList = {
 
                 //set the content
                 item.querySelector('.title').textContent = person.name;
-                if(person.imageUrl){
-                    item.querySelector('img').src = person.imageUrl;
+                if(person.imageURL){
+                    item.querySelector('img').src = person.imageURL;
                 } else {
                     item.querySelector('img').src = personList.defaultImageSrc;
                 }
