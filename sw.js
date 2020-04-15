@@ -112,10 +112,10 @@ function onFetch(ev){
                     return caches.open(dynamicCacheName).then(cache =>{
                         //cache the request if it does not come from our api
                         //or it comes from our API and uses get
-                        if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 || 
-                        (ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 &&
-                        ev.request.method == 'GET')){
-                            console.log('adding to dynamic cache', ev.request.url);
+                        if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1){
+                            //currently only cahcing if it doesnt come from our api add the following to the if statement to allow cached GETS
+                            //(ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')
+                            console.log('adding to dynamic cache', ev.request.url, fetchRes.clone());
                             cache.put(ev.request.url, fetchRes.clone()); //cloning the response to still send it back to browser
                             limitCacheSize(dynamicCacheName, dynamicCacheSize);
                         }

@@ -40,7 +40,7 @@
 - [x] Add PWA requirements to the head of the html pages (404.html, gifts.html, index.html)
 - [x] Create a manifest.json that links to all icons made
 - [x] Create a service worker (sw.js) with a global scope and register it in one of the main modules (main.js/ app.js) || HAVE BUGS
-- [ ] Allow a service worker to cache requests and display them to the user when offline
+- [x] Allow a service worker to cache requests and display them to the user when offline
 - [ ] Manage the install process of a pwa by following: https://prof3ssorst3v3.github.io/mad9022/modules/week11/install.html
 - [ ] BONUS: you can earn a bonus 5% if you use IndexedDB and the idb-keyval library to save requests for Deleting existing people and gifts or Adding new people or gifts when the user is offline. (https://www.npmjs.com/package/idb-keyval)
 - [ ] BONUS: You can earn another 5% if you are able to take any data out of IndexedDB and send it to the API when the the network connection is re-established.
@@ -58,5 +58,5 @@
 - [x] sort birthday is not working
 - [x] figure out why date formatted is always one day before the actual date given | solution: setUTCHours(>1) so to say it is past midnight
 - [ ] Figure out why Jan 1st is sorted as the last day of the year by my ui.Sort method
-- [ ] Service worker will not respond with cached page and will always default to caching every item even things that should already be stored in staticCache
-- [ ] With the Service worker fetch event i cannot give gifts back to the user for some reason, look into how i put the response into my dynamic cache also go eat lunch
+- [x] Service worker will not respond with cached page and will always default to caching every item even things that should already be stored in staticCache | was caching the full request not just the url as the key
+- [ ] unexpeceted json at position 0 when SW gives cached response for person/giftList.js when they run
