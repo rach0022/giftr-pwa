@@ -134,7 +134,7 @@ function onFetch(ev){
             if(url.pathname.indexOf('.html') > -1){
                 return caches.match('/pages/404.html');
             }
-            //return caches.match('/index.html'); fallback if we cant load something else
+            return caches.match('/index.html'); //fallback if we cant load something else
         })
     );
 }
