@@ -70,6 +70,7 @@ export const giftList = {
                 return res.json();
             })
             .then(data =>{
+                console.log(data, "DATADATADATADATADATADATADATADATADATADATADATA")
                 if(data.errors){
                     console.log('error fetching data');
                     M.toast({html: 'error fetching gift list'});

@@ -59,3 +59,4 @@
 - [x] figure out why date formatted is always one day before the actual date given | solution: setUTCHours(>1) so to say it is past midnight
 - [ ] Figure out why Jan 1st is sorted as the last day of the year by my ui.Sort method
 - [ ] Service worker will not respond with cached page and will always default to caching every item even things that should already be stored in staticCache
+- [ ] With the Service worker fetch event i cannot give gifts back to the user for some reason, look into how i put the response into my dynamic cache also go eat lunch
