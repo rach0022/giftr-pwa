@@ -1,6 +1,6 @@
 'use strict';
-const staticCacheName = 'static-cache-v6';
-const dynamicCacheName = 'dynamic-cache-v4';
+const staticCacheName = 'static-cache-v8';
+const dynamicCacheName = 'dynamic-cache-v5';
 const dynamicCacheSize = 50;
 const staticAssets = [
     '/',
@@ -38,7 +38,7 @@ let baseURL = null;
 //listen for service worker events
 self.addEventListener('install', onInstall); //install event for service worker
 self.addEventListener('activate', onActivate); //activating the service worker fires after install event
-self.addEventListener('message', onMessage); //will have events isOnline, isLoggedIn etc
+// self.addEventListener('message', onMessage); //will have events isOnline, isLoggedIn etc
 self.addEventListener('fetch', onFetch); //to cache or not (requests from webpage)
 
 //helper functions to assist the service worker
@@ -103,7 +103,7 @@ function onFetch(ev){
             //cacheRes could be undefined
 
             //return the caches response or fetch the request
-            console.log('CACHERES',cacheRes);
+            // console.log('CACHERES',cacheRes);
             return (
                 cacheRes ||
                 fetch(ev.request).then(fetchRes =>{
@@ -133,7 +133,7 @@ function onFetch(ev){
                         throw new Error('failed to fetch');
                     }
                 })
-            )
+            );
         })
             .catch(err =>{
                 //offline handler
@@ -152,6 +152,6 @@ function onFetch(ev){
 }
 
 //recieved a message from the webpage (maybe online/login status)
-function onMessage({data}){
-    console.log('recieved a message from webpage', data);
-}
+// function onMessage({data}){
+//     console.log('recieved a message from webpage', data);
+// }
