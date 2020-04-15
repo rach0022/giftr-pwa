@@ -1,6 +1,6 @@
 'use strict';
-const staticCacheName = 'static-cache-v12';
-const dynamicCacheName = 'dynamic-cache-v7';
+const staticCacheName = 'static-cache-v15';
+const dynamicCacheName = 'dynamic-cache-v8';
 const dynamicCacheSize = 50;
 const staticAssets = [
     '/',
@@ -103,7 +103,8 @@ function onFetch(ev){
         //check both the static and dynamic cache for the file
         //if we get a cacheRes give that back or do the normal fetch
         //if fetch fails then just go to our offline handler fallback in the catch
-        caches.match(ev.request).then(cacheRes =>{
+        caches.match(ev.request.url).then(cacheRes =>{
+            console.log(cacheRes);
             return cacheRes || fetch(ev.request).then(fetchRes =>{
                 //if it wasnt in our cache and we didnt get a 404 status code open up the dynamic cache
                 console.log(ev.request, 'was not in cache');
@@ -122,13 +123,13 @@ function onFetch(ev){
                     });
                 } else {
                     //failed to fetch for another reason
-                    console.log('failed to fetch', fetchRes);
+                    console.log('failed to fetch', fetchRes, fetchRes.status);
                     throw new Error('failed to fetch');
                 }
             })
         }).catch(err =>{
             let url = new URL(ev.request.url)
-            console.warn(err, 'failed URL:', url);
+            console.warn(err, url);
 
             //check if we were trying to open an html page if so send them to index
             if(url.pathname.indexOf('.html') > -1){

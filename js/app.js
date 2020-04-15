@@ -7,7 +7,7 @@
 *  @version Apr 14, 2020
 *
 ***********************/
-
+'use strict';
 import {pubsub} from './pubsub.js';
 import {ui} from './ui.js';
 import {nav} from './nav.js';
