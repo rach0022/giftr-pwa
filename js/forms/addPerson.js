@@ -51,6 +51,7 @@ export const addPersonForm = {
                         giftrRequests.error(data.errors);
                         // console.log('error sending person', data.errors, data.errors[0])
                     } else if (data.data){
+                        form.querySelector('form').reset();
                         return data.data
                     }
                 })

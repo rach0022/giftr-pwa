@@ -49,15 +49,14 @@ export const addGiftForm = {
         store.name = form.querySelector('#storename-gift').value;
         store.productUrl = form.querySelector('#storeURL-gift').value;
         let imageUrl = form.querySelector('#imageURL-gift').value;
-
         let req = giftrRequests.send(
             'POST', 
             `/api/people/${addGiftForm.personId}/gifts/`,
-            {name, store, price, imageUrl},
+            {name, "imageURL":imageUrl, store, price},
             true,
             true
         );
-        console.log(req);
+        console.log(req, {name, store, price, "imageUrl":imageUrl});
         
         if(req){
             fetch(req)
@@ -66,7 +65,7 @@ export const addGiftForm = {
                     if(data.errors){
                         giftrRequests.error(data.errors);
                     } else if (data.data){
-                        
+                        form.querySelector('form').reset();
                     }
                     return data.data || data.errors
                 })
