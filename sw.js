@@ -1,5 +1,5 @@
 'use strict';
-const staticCacheName = 'static-cache-v25';
+const staticCacheName = 'static-cache-v35';
 const dynamicCacheName = 'dynamic-cache-v10';
 const dynamicCacheSize = 50;
 const staticAssets = [
@@ -38,7 +38,7 @@ let baseURL = null;
 //listen for service worker events
 self.addEventListener('install', onInstall); //install event for service worker
 self.addEventListener('activate', onActivate); //activating the service worker fires after install event
-// self.addEventListener('message', onMessage); //will have events isOnline, isLoggedIn etc
+self.addEventListener('message', onMessage); //will have events isOnline, isLoggedIn etc
 self.addEventListener('fetch', onFetch); //to cache or not (requests from webpage)
 
 //helper functions to assist the service worker
@@ -90,6 +90,8 @@ function onActivate(ev){
         })
     );
     console.log('service worker activated');
+
+    //this would be a good place to init indexedDB database
 }
 
 //fetch events
@@ -128,8 +130,24 @@ function onFetch(ev){
                 }
             })
         }).catch(err =>{
+            //the offiline handler
             let url = new URL(ev.request.url)
             console.warn(err, url);
+
+            // then lets go into indexed db and serve that page
+            //whenever i implement that for now lets just just serve up something else
+            //for now lets just serve up some dummy data for gifts or people saying offline
+            if (url.hostname == 'giftr.mad9124.rocks'){
+                // let data = null; 
+                // if(url.pathname.indexOf('/gifts') > -1){
+                //     data = {"data": {"name": "OFFLINE"}}
+                // } else if(url.pathname.indexOf('token') > -1){
+                //     data = {"data": {"token": "offline"}};
+                // } else if(url.pathname.indexOf('people') > -1){
+                //     data = {"data": {"name": "OFFLINE", "birthDate": "01-01-0001"}}
+                // }
+                // return data;
+            } 
 
             //check if we were trying to open an html page if so send them to index
             if(url.pathname.indexOf('.html') > -1){
@@ -140,7 +158,26 @@ function onFetch(ev){
     );
 }
 
-//recieved a message from the webpage (maybe online/login status)
-// function onMessage({data}){
-//     console.log('recieved a message from webpage', data);
-// }
+async function sendMessage(msg) {
+    //send the message to all clients (tabs) using this service worker
+    var allClients = await clients.matchAll({ includeUncontrolled: true });
+    return Promise.all(
+        allClients.map(function sendTo(client) {
+        var chan = new MessageChannel();
+        chan.port1.onmessage = onMessage;
+        return client.postMessage(msg, [chan.port2]);
+        })
+    );
+}
+
+//recieved a message from the webpage (maybe online/login status)  
+function onMessage({ data }) {
+    //received a message from the webpage
+    //probably just updating our online status
+    if ('statusUpdate' in data) {
+        console.log(`Service Worker receiving message ${data}`);
+    }
+    if ('baseURL' in data) {
+        baseURL = data.baseURL;
+    }
+}

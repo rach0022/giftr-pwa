@@ -70,6 +70,7 @@ export const personList = {
                 }
                 if(data.data){
                     // M.toast({html: 'retrieved person list'});
+                    console.log(data.data, "the DATA FROM THE FETCH")
                     return data.data
                 }
             })

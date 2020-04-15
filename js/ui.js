@@ -78,7 +78,7 @@ export const ui = {
         //but if the months are equal then we check the day comparison
         //otherwise if the month is less then the current month it will be styled
         //as a past date
-        console.log(comparisonDate.getMonth(),  today.getMonth());
+        // console.log(comparisonDate.getMonth(),  today.getMonth());
         if(comparisonDate.getMonth() > today.getMonth()){
             return undefined;  //return empty string so nothing is added to the classlist
         } else if (comparisonDate.getMonth() == today.getMonth()){

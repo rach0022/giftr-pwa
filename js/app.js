@@ -20,12 +20,23 @@ import {addGiftForm} from './forms/addGift.js';
 
 let giftr = {
     sw: null,
-    isOnline: true, 
+    defferedPrompt: null,
+    isOnline: true,
+    baseURL: null,
+
     init: ev => {
 
         //register the service worker
         if('serviceWorker' in navigator){
-            giftr.initServiceWorker().catch(console.error);
+            giftr.initServiceWorker().then(() =>{
+                //tell the modules if user is logged in or not
+                if(token) {
+                    pubsub.publish('loginStatus', true); //tell the other modules if the user is logged in
+                    giftr.sendMessage({"statusUpdate":'isLoggedIn'});
+                } else {
+                    pubsub.publish('loginStatus', false); //tell the other modules if the user is not logged in
+                }
+            }).catch(console.error);
         }
         
         //check if the user is logged in:
@@ -48,13 +59,6 @@ let giftr = {
             personList.render(document.querySelector('main'));
             addPersonForm.render(document.body);
         }
-
-        //tell the modules if user is logged in or not
-        if(token) {
-            pubsub.publish('loginStatus', true); //tell the other modules if the user is logged in
-        } else {
-            pubsub.publish('loginStatus', false); //tell the other modules if the user is not logged in
-        }
         ui.initModal('errorModal'); //init the error modal
 
         
@@ -63,13 +67,31 @@ let giftr = {
     initServiceWorker: async () => {
         
         let swRegistration = await navigator.serviceWorker.register('/sw.js', {
+            updateViaCache: 'none',
             scope: '/'
         });
 
         //set the service worker after registering, it could be in any of those states
         giftr.sw = swRegistration.installing || swRegistration.waiting || swRegistration.active;
 
+        //tell the service worker the base url
+        giftr.sendMessage({baseURL: giftr.baseURL});
         //init any service worker events that need to be listened for 
+        navigator.serviceWorker.addEventListener('controllerchange', async () => {
+            giftr.SW = navigator.serviceWorker.controller;
+        });
+        navigator.serviceWorker.addEventListener('message', giftr.onMessage, false);
+    },
+    onMessage: (ev) => {
+        //message from SW received
+        let { data } = ev;
+        console.log(ev.ports);
+        console.log(data);
+    },
+    sendMessage: (msg) => {
+        //msg is a JS Object
+        //tell SW that we are online or offline
+        giftr.sw.postMessage(msg);
     }
 };
 
