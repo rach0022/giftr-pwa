@@ -63,7 +63,6 @@ let giftr = {
     initServiceWorker: async () => {
         
         let swRegistration = await navigator.serviceWorker.register('/sw.js', {
-            updateViaCache: 'none',
             scope: '/'
         });
 
