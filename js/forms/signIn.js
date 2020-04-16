@@ -62,6 +62,8 @@ export const signInForm = {
                     }
                 })
                 .catch(err => {
+                    ui.closeModal(form);
+                    M.toast({html: 'encountered network error while signing in'});
                     // console.error(err)
                     // M.toast({html : 'fatal error'})
                     console.log("This is the error", err);

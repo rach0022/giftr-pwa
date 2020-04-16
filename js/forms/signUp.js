@@ -69,7 +69,8 @@ export const signUpForm = {
                     }
                 })
                 .catch(err => {
-                    M.toast({html: 'fatal error'});
+                    M.toast({html: 'encountered network error while signing up'});
+                    ui.closeModal(form);
                     console.error('this is the error', err);
                 });
         }

@@ -59,6 +59,7 @@
 - [x] figure out why date formatted is always one day before the actual date given | solution: setUTCHours(>1) so to say it is past midnight
 - [ ] Figure out why Jan 1st is sorted as the last day of the year by my ui.Sort method
 - [x] Service worker will not respond with cached page and will always default to caching every item even things that should already be stored in staticCache | was caching the full request not just the url as the key
-- [ ] unexpeceted json at position 0 when SW gives cached response for person/giftList.js when they run 
-- [ ] user can see other users cached data: solution: delete dynamic cache by telling service worker to do that
-- [ ] use an online first then cache strategy for giving back files from service worker
+- [x] unexpeceted json at position 0 when SW gives cached response for person/giftList.js when they run | was building collection regardless of response not just when we get data 
+- [x] user can see other users cached data: solution: delete dynamic cache by telling service worker to do that
+- [x] user cannot see updated data :  use an online first then cache strategy for giving back files from service worker
+- [ ] using a cache first strategy causes the dynamic cache to double cache, should I try and fix this or just let this be, also should i stop limiting the dynamic cache size because it will always be empty when the user logs in

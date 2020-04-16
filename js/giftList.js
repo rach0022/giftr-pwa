@@ -16,6 +16,7 @@ export const giftList = {
     personId: null, //container for the person id stored in session storage
     emptyMessage: 'You have no gifts added, press the green button to add',
     defaultImageSrc: '../img/noIdeaPic.png',
+    cantRetrieveMessage:"Could not retrieve your gifts at this time",
     render: container =>{
         let template = document.getElementById('giftListTemplate');
         // let template = document.getElementById('giftListTemplate');
@@ -77,16 +78,18 @@ export const giftList = {
                 }
                 if(data.data){
                     // M.toast({html: 'retrieved gift list'});
-                    return data.data.gifts
+                    giftList.buildGiftCards(data.data.gifts);
+                    // return data.data.gifts
                 }
-            })
-            .then(gifts =>{
-                console.log(gifts);
-                giftList.buildGiftCards(gifts);
             })
             .catch(err => {
                 console.error('error fetching gifts', err);
                 M.toast({html: 'fatal error fetching gift list'});
+
+                let heading = document.createElement('h5');
+                heading.textContent = giftList.cantRetrieveMessage;
+                heading.classList.add('center-align');
+                document.getElementById('giftList').appendChild(heading);
             })
     },
 

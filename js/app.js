@@ -87,6 +87,7 @@ let giftr = {
             giftr.SW = navigator.serviceWorker.controller;
         });
         navigator.serviceWorker.addEventListener('message', giftr.onMessage, false);
+        giftr.networkStatusChange(null); //check if we are online on open
     },
 
     // call back function when we get a function from the service worker
@@ -113,14 +114,21 @@ let giftr = {
         if (navigator.onLine){
             //we might be online
             let req = giftrRequests.send('GET', '/', null, false, false);
+            //send a message to the service worker to temporarily open up fetch requests
+            //and we will shut them off the moment we realize we are offline
+            giftr.sendMessage({"statusUpdate": true, "isOnline": true});
             if(req){
                 fetch(req)
                     .then(res =>{
                         //check if the response has an error or data
                         if(res.errors){
                             giftr.sendMessage({"statusUpdate": true, "isOnline": false});
+                            document.getElementById('offlineBadge').classList.remove('hide');
+                            document.querySelector('.fixed-action-btn').classList.add('hide');
                         } else if(res.ok) {
-                            giftr.sendMessage({"statusUpdate": true, "isOnline": true}); //we are not online
+                            giftr.sendMessage({"statusUpdate": true, "isOnline": true}); //we are online
+                            document.getElementById('offlineBadge').classList.add('hide');
+                            document.querySelector('.fixed-action-btn').classList.remove('hide');
                         }
                         console.log("HEALTH STATUS RESPONSE", res);
                     }).catch(console.warn);
@@ -128,6 +136,8 @@ let giftr = {
         } else {
             //we definitely arent online
             giftr.sendMessage({"statusUpdate": true, "isOnline": false});
+            document.getElementById('offlineBadge').classList.remove('hide');
+            document.querySelector('.fixed-action-btn').classList.add('hide');
         }
     }
 };

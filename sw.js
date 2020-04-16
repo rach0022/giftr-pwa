@@ -1,5 +1,5 @@
 'use strict';
-const staticCacheName = 'static-cache-v47';
+const staticCacheName = 'static-cache-v68';
 const dynamicCacheName = 'dynamic-cache-v11';
 const dynamicCacheSize = 50;
 const staticAssets = [
@@ -58,6 +58,37 @@ const limitCacheSize = (name, size) =>{
     })
 }
 
+//helper function to serve back a file from the cache
+//if we have network issues and also to avoid wastign time with a fetch if we
+//are offline
+function serveFromCacheFallback(err){
+    console.log('offline')
+    //the offiline handler
+    let url = new URL(ev.request.url)
+    console.warn(err, url);
+
+    // then lets go into indexed db and serve that page
+    //whenever i implement that for now lets just just serve up something else
+    //for now lets just serve up some dummy data for gifts or people saying offline
+    if (url.hostname == 'giftr.mad9124.rocks'){
+        // let data = null; 
+        // if(url.pathname.indexOf('/gifts') > -1){
+        //     data = {"data": {"name": "OFFLINE"}}
+        // } else if(url.pathname.indexOf('token') > -1){
+        //     data = {"data": {"token": "offline"}};
+        // } else if(url.pathname.indexOf('people') > -1){
+        //     data = {"data": {"name": "OFFLINE", "birthDate": "01-01-0001"}}
+        // }
+        // return data;
+    } 
+
+    //check if we were trying to open an html page if so send them to index
+    if(url.pathname.indexOf('.html') > -1){
+        return caches.match('/pages/404.html');
+    }
+    return caches.match('/index.html'); //fallback if we cant load something else
+}
+
 //async function to send the message to all clients (tabs) using this service worker
 // async function sendMessage(msg) {};
 
@@ -98,66 +129,43 @@ function onActivate(ev){
 //fetch events
 function onFetch(ev){
     console.log('service worker observed a fetch at:', ev.request.url);
-
-    // //now to actually handle that event with a cache first to online fallback
-
-    //rewriting the below code by formatted better:
-    ev.respondWith(
-        //check both the static and dynamic cache for the file
-        //if we get a cacheRes give that back or do the normal fetch
-        //if fetch fails then just go to our offline handler fallback in the catch
-        caches.match(ev.request.url).then(cacheRes =>{
-            // console.log(cacheRes);
-            return cacheRes || fetch(ev.request).then(fetchRes =>{
-                //if it wasnt in our cache and we didnt get a 404 status code open up the dynamic cache
-                console.log(ev.request, 'was not in cache');
-                if(fetchRes.status != 404){
-                    return caches.open(dynamicCacheName).then(cache =>{
-                        //cache the request if it does not come from our api
-                        //or it comes from our API and uses get
-                        if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 ||(
-                            ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')){
-                            //currently only cahcing if it doesnt come from our api add the following to the if statement to allow cached GETS
-                            // ||(ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')
-                            console.log('adding to dynamic cache', ev.request.url, fetchRes.clone());
-                            cache.put(ev.request.url, fetchRes.clone()); //cloning the response to still send it back to browser
-                            limitCacheSize(dynamicCacheName, dynamicCacheSize);
-                        }
-                        return fetchRes; //return the original response
-                    });
-                } else {
-                    //failed to fetch for another reason
-                    console.log('failed to fetch', fetchRes, fetchRes.status);
-                    throw new Error('failed to fetch');
-                }
-            })
-        }).catch(err =>{
-            //the offiline handler
-            let url = new URL(ev.request.url)
-            console.warn(err, url);
-
-            // then lets go into indexed db and serve that page
-            //whenever i implement that for now lets just just serve up something else
-            //for now lets just serve up some dummy data for gifts or people saying offline
-            if (url.hostname == 'giftr.mad9124.rocks'){
-                // let data = null; 
-                // if(url.pathname.indexOf('/gifts') > -1){
-                //     data = {"data": {"name": "OFFLINE"}}
-                // } else if(url.pathname.indexOf('token') > -1){
-                //     data = {"data": {"token": "offline"}};
-                // } else if(url.pathname.indexOf('people') > -1){
-                //     data = {"data": {"name": "OFFLINE", "birthDate": "01-01-0001"}}
-                // }
-                // return data;
-            } 
-
-            //check if we were trying to open an html page if so send them to index
-            if(url.pathname.indexOf('.html') > -1){
-                return caches.match('/pages/404.html');
-            }
-            return caches.match('/index.html'); //fallback if we cant load something else
-        })
-    );
+    if(isOnline){
+        ev.respondWith(
+            fetch(ev.request)
+                .then(fetchRes =>{
+                    if(fetchRes.status != 404){
+                        return caches.open(dynamicCacheName).then(cache =>{
+                            //cache the request if it does not come from our api
+                            //or it comes from our API and uses get
+                            if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 ||(
+                                ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')){
+                                //currently only cahcing if it doesnt come from our api add the following to the if statement to allow cached GETS
+                                // ||(ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')
+                                console.log('adding to dynamic cache', ev.request.url, fetchRes.clone());
+                                cache.put(ev.request.url, fetchRes.clone()); //cloning the response to still send it back to browser
+                                limitCacheSize(dynamicCacheName, dynamicCacheSize);
+                            }
+                            return fetchRes; //return the original response
+                        });
+                    } else {
+                        //failed to fetch for another reason
+                        console.log('failed to fetch', fetchRes, fetchRes.status);
+                        throw new Error('failed to fetch');
+                    }
+                })
+                .catch(err =>{
+                    return caches.match(ev.request.url).then(cacheRes =>{
+                        return cacheRes; 
+                    }).catch(serveFromCacheFallback); 
+                })
+        );
+    } else { //we are offline check the cache or hit the fallback
+        // console.log('we are offline and checking on the cache');
+        ev.respondWith(caches.match(ev.request.url).then(cacheRes =>{
+            return cacheRes
+        }).catch(serveFromCacheFallback));
+    }
+    
 }
 
 async function sendMessage(msg) {

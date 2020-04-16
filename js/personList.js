@@ -14,6 +14,7 @@ import {ui} from './ui.js';
 
 export const personList = {
     emptyMessage: 'You Have no Friends Added, please press the green button to add a friend',
+    cantRetrieveMessage:"Could not retrieve your friends at this time",
     defaultImageSrc: '../img/noProfilePic.png',
     //render the person list in whatever contaienr sepecified
     render: container =>{
@@ -82,6 +83,11 @@ export const personList = {
             .catch(err =>{
                 console.error('error fetching people', err);
                 M.toast({html: 'fatal error fetching person list'});
+
+                let heading = document.createElement('h5');
+                heading.textContent = personList.cantRetrieveMessage;
+                heading.classList.add('center-align');
+                document.getElementById('personList').appendChild(heading);
         });
     },
 
