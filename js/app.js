@@ -26,7 +26,8 @@ let giftr = {
     baseURL: null,
 
     init: ev => {
-
+        //get rid of js disabled message
+        document.querySelector('main').innerHTML = ""; 
         //register the service worker
         if('serviceWorker' in navigator){
             giftr.initServiceWorker().then(() =>{

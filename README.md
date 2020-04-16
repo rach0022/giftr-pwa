@@ -65,3 +65,4 @@
 - [x] user cannot see updated data :  use an online first then cache strategy for giving back files from service worker
 - [ ] using a cache first strategy causes the dynamic cache to double cache, should I try and fix this or just let this be, also should i stop limiting the dynamic cache size because it will always be empty when the user logs in
 - [ ] icons are 1px x 1px bigger then specified, maybe it was becuase i included the bleed. I planned on remaking them so just dont include the bleed next time and also choose some colours and fonts while you are at it
+- [x] auding failing: Does not provide fallback content when JavaScript is not available | solution : find a way to add some html to the body when the page loads by is cleared when the app loads. probs in app.js || WOO can pass the audit!!!
