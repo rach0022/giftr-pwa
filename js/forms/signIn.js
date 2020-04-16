@@ -40,13 +40,14 @@ export const signInForm = {
         let email = form.querySelector('#email-login').value;
         let password = form.querySelector('#password-login').value;
         let req = giftrRequests.send('POST', '/auth/tokens/', {email, password}, true, false);
-
+        document.querySelector('.preloader-wrapper').classList.remove('hide');
         if(req){    
             fetch(req)
                 .then(res => res.json())
                 .then(res => {
                     ui.closeModal(form);
                     console.log(res);
+                    document.querySelector('.preloader-wrapper').classList.add('hide');
                     if (res.errors){
                         // console.log("signin failed");
                         // M.toast({html: 'signin failed'});

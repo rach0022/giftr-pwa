@@ -5,6 +5,30 @@
 @import 'fonts';
 @import 'mixins';
 
+//set the base font styles
+*{
+    font-family: 'Lexend Giga', 'sans-serif';
+}
+
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Bree Serif', 'serif';
+}
+
+// html{
+//     font-size: 18px; //
+// }
+
+//materailize overrides
+
+.preloader-wrapper{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
 .modal { 
     max-height: 100%; //increase modal height to support form content
     overflow: visible;

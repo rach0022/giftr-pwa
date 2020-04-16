@@ -1,0 +1,30 @@
+//google fonts downloaded with https://google-webfonts-helper.herokuapp.com/fonts/lexend-giga?subsets=latin
+//Only have font weight of 400 for this app
+
+/* lexend-giga-regular - latin */
+@font-face {
+    font-family: 'Lexend Giga';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./google-fonts/lexend-giga-v1-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Lexend Giga Regular'), local('LexendGiga-Regular'),
+         url('./google-fonts/lexend-giga-v1-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./google-fonts/lexend-giga-v1-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./google-fonts/lexend-giga-v1-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('./google-fonts/lexend-giga-v1-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./google-fonts/lexend-giga-v1-latin-regular.svg#LexendGiga') format('svg'); /* Legacy iOS */
+}
+
+/* bree-serif-regular - latin */
+@font-face {
+    font-family: 'Bree Serif';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./google-fonts/bree-serif-v9-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Bree Serif Regular'), local('BreeSerif-Regular'),
+         url('./google-fonts/bree-serif-v9-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./google-fonts/bree-serif-v9-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./google-fonts/bree-serif-v9-latin-regular.woff') format('woff'), /* Modern Browsers */
+         url('./google-fonts/bree-serif-v9-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./google-fonts/bree-serif-v9-latin-regular.svg#BreeSerif') format('svg'); /* Legacy iOS */
+}  

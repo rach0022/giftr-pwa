@@ -1,5 +1,5 @@
 'use strict';
-const staticCacheName = 'static-cache-v69';
+const staticCacheName = 'static-cache-v74';
 const dynamicCacheName = 'dynamic-cache-v11';
 const dynamicCacheSize = 50;
 const staticAssets = [
@@ -31,6 +31,16 @@ const staticAssets = [
     '/img/icon/icon-192x192.png',
     '/img/icon/icon-384x384.png',
     '/img/icon/icon-512x512.png',
+    '/css/google-fonts/bree-serif-v9-latin-regular.eot',
+    '/css/google-fonts/bree-serif-v9-latin-regular.svg',
+    '/css/google-fonts/bree-serif-v9-latin-regular.ttf',
+    '/css/google-fonts/bree-serif-v9-latin-regular.woff',
+    '/css/google-fonts/bree-serif-v9-latin-regular.woff2',
+    '/css/google-fonts/lexend-giga-v1-latin-regular.eot',
+    '/css/google-fonts/lexend-giga-v1-latin-regular.svg',
+    '/css/google-fonts/lexend-giga-v1-latin-regular.ttf',
+    '/css/google-fonts/lexend-giga-v1-latin-regular.woff',
+    '/css/google-fonts/lexend-giga-v1-latin-regular.woff2',
     '/manifest.json'
 ];
 let baseURL = null;

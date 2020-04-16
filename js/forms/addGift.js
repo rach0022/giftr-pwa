@@ -52,11 +52,10 @@ export const addGiftForm = {
         let req = giftrRequests.send(
             'POST', 
             `/api/people/${addGiftForm.personId}/gifts/`,
-            {name, "imageURL":imageUrl, store, price},
+            {name, "imageUrl":imageUrl, store, price},
             true,
             true
         );
-        console.log(req, {name, store, price, "imageUrl":imageUrl});
         
         if(req){
             fetch(req)

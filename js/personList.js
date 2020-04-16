@@ -15,6 +15,7 @@ import {ui} from './ui.js';
 export const personList = {
     emptyMessage: 'You Have no Friends Added, please press the green button to add a friend',
     cantRetrieveMessage:"Could not retrieve your friends at this time",
+    userName: "", //the firstName of the User (figure out how to get later)
     defaultImageSrc: '../img/noProfilePic.png',
     //render the person list in whatever contaienr sepecified
     render: container =>{
@@ -96,6 +97,10 @@ export const personList = {
         let template = document.getElementById('collectionTemplate');
         // let template = document.getElementById('cardTemplate');
         let frag = document.createDocumentFragment();
+        let title = document.createElement('h3');
+        title.textContent = `${personList.userName}Friends List`;
+        title.classList.add('center');
+        frag.appendChild(title);
 
         if(people.length > 0){
             people.forEach(person =>{

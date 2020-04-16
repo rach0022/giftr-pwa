@@ -7,7 +7,7 @@
 - [x] create x-icon for desktop version | copied from assignment 1
 - [x] link materialize library (self hosted for offline use)
 - [ ] decide on a colour scheme (add class to body based on colour scheme)
-- [ ] choose some google fonts to host on site, maybe even add them to the static/ dynamic cache
+- [x] choose some google fonts to host on site, maybe even add them to the static/ dynamic cache
 - [x] decide on design practice (pubsub, seems like the best option so far)
 - [x] create some base materialize templates to use
 - [x] figure out form validation with materialize forms
@@ -18,6 +18,8 @@
 - [x] add GIFTR-SPA functionality like sorting by birthdate, checking if birthdate is past, formatting dates, formatting currency
 - [x] add Empty list message for gifts and person list if there are no gifts or people added
 - [x] CANCELED | I like it where it is switch signout link to outside of profile section and move to header
+- [x] add loader to signin page as it takes a while to gen a token
+- [ ] fix up styles and alignment of the badges
 
 ### Templates/ Componenets to Decide on Based on Materialize:
 - [x] Nav Bar when logged out (needs login, and signup form links) || started creating, now need to decide on how to make signup and login forms to show when the nav is selected, also change isUserAuth to change the anv bar when the user is logged in or out
@@ -35,7 +37,7 @@
 - [x] Empty Person Silhouette to use when no image URL is defined
 - [x] Gift Picture to use when no gift.imageUrl is provided
 - [x] Icon for the PWA App in all the sizes needed (sizes to come) | DESIGN A BETTER ONE
-- [ ] SVG Loader Icon
+- [x] CANCELLED SVG Loader Icon || used preloader from materialize instead
 
 ### To Do To Convert to PWA: 
 - [x] Add PWA requirements to the head of the html pages (404.html, gifts.html, index.html)
@@ -54,7 +56,7 @@
 
 ### Bugs: 
 - [x] Fix login and signup links dissapearing on larger screens (possibly just a materialize class) || add class show-on-large to links in nav to see on larger screens
-- [ ] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it || fixed everything except for imageURL for gifts, ask steve
+- [x] imageUrl for person and product/imageUrl for gifts are not sending properly as the object recieved never has it || fixed everything except for imageURL for gifts, ask steve
 - [x] price for gift is always null when sent
 - [x] sort birthday is not working
 - [x] figure out why date formatted is always one day before the actual date given | solution: setUTCHours(>1) so to say it is past midnight

@@ -17,6 +17,7 @@ export const giftList = {
     emptyMessage: 'You have no gifts added, press the green button to add',
     defaultImageSrc: '../img/noIdeaPic.png',
     cantRetrieveMessage:"Could not retrieve your gifts at this time",
+    friendName: "", //used to store the friend name to display as the heading of the gifts page
     render: container =>{
         let template = document.getElementById('giftListTemplate');
         // let template = document.getElementById('giftListTemplate');
@@ -71,13 +72,13 @@ export const giftList = {
                 return res.json();
             })
             .then(data =>{
-                console.log(data, "DATADATADATADATADATADATADATADATADATADATADATA")
                 if(data.errors){
                     console.log('error fetching data');
                     M.toast({html: 'error fetching gift list'});
                 }
                 if(data.data){
                     // M.toast({html: 'retrieved gift list'});
+                    giftList.friendName = data.data.name; //set the friend name
                     giftList.buildGiftCards(data.data.gifts);
                     // return data.data.gifts
                 }
@@ -95,8 +96,13 @@ export const giftList = {
 
     buildGiftCards: gifts =>{
         let template = document.getElementById('collectionTemplate');
+
         // let template = document.getElementById('cardTemplate');
         let frag = document.createDocumentFragment();
+        let title = document.createElement('h3');
+        title.textContent = `${giftList.friendName}'s Gifts`;
+        title.classList.add('center');
+        frag.appendChild(title);
         if(gifts.length > 0){
             gifts.forEach(gift =>{
                 let item = template.content.cloneNode(true); //get the card
@@ -107,7 +113,7 @@ export const giftList = {
                 //set the classes and attributes
                 item.querySelector('.collection-item').setAttribute('data-giftid', gift._id);
                 del_btn.setAttribute('data-giftid', gift._id);
-                link.href = ui.addProtocol(gift.store.productUrl); 
+                link.href = ui.addProtocol(gift.store.productUrl);
 
                 //set the content
                 item.querySelector('.title').textContent = gift.name
