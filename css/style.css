@@ -44,6 +44,12 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Bree Serif', 'serif'; }
 
+.banner {
+  display: flex;
+  align-content: center;
+  justify-self: center;
+  width: 100%; }
+
 .preloader-wrapper {
   position: absolute;
   top: 0;
@@ -64,5 +70,13 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: row;
   justify-content: center;
   align-items: center; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 0 auto; }
 
 /*# sourceMappingURL=style.css.map */

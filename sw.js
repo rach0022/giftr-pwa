@@ -1,5 +1,5 @@
 'use strict';
-const staticCacheName = 'static-cache-v74';
+const staticCacheName = 'static-cache-v81';
 const dynamicCacheName = 'dynamic-cache-v11';
 const dynamicCacheSize = 50;
 const staticAssets = [

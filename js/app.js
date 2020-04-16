@@ -22,6 +22,7 @@ import {addGiftForm} from './forms/addGift.js';
 let giftr = {
     sw: null,
     defferedPrompt: null,
+    acceptedInstall: true,
     isOnline: true,
     baseURL: null,
 
@@ -63,12 +64,41 @@ let giftr = {
             addPersonForm.render(document.body);
         }
         ui.initModal('errorModal'); //init the error modal
+        ui.initModal('installModal'); //init the install modal
 
         //add any listeners that we need
         window.addEventListener('online', giftr.networkStatusChange);
         window.addEventListener('offline', giftr.networkStatusChange);
+        window.addEventListener('beforeinstallprompt', ev =>{
+            if(giftr.acceptedInstall){
+                ev.preventDefault();
+                console.log('deffered prompt');
+                giftr.defferedPrompt = ev;
 
-        
+                //udpating the ui to display the user they can install
+                document.querySelector('#installBanner').classList.remove('hide');
+            }
+        })
+
+        //check hwo the app was openeed, from safari, home screen or tab
+        if(navigator.standalone){
+            //safari isntall sign...
+            console.log('Launched: Installed (iOS)');
+
+        } else if (matchMedia('(display-mode: standalone)').matches){
+            console.log('Launched: Installed');
+        } else {
+            console.log('Launced: Browser Tab');
+        }
+
+        //get a reference to the install modal
+        let installBtn = document.getElementById('installButton');
+        installBtn.addEventListener('click', giftr.installPrompt);
+
+        //trigger something after app is installed
+        window.addEventListener('appinstalled', ev =>{
+            console.log('Thanks for installing fam');
+        })
     },
 
     initServiceWorker: async () => {
@@ -139,6 +169,29 @@ let giftr = {
             giftr.sendMessage({"statusUpdate": true, "isOnline": false});
             document.getElementById('offlineBadge').classList.remove('hide');
             document.querySelector('.fixed-action-btn').classList.add('hide');
+        }
+    },
+
+    installPrompt: ev =>{
+        ev.preventDefault();
+        
+
+        //wait for the user prompt
+        if(giftr.defferedPrompt){
+            //show the mini info bar
+            giftr.defferedPrompt.prompt();
+
+            giftr.defferedPrompt.userChoice.then(choiceResult =>{
+                if(choiceResult.outcome === 'accepted'){
+                    document.querySelector('#installBanner').classList.add('hide');
+                    console.log('user accepted to install');
+                } else {
+                    console.log('User dismissed the install prompt');
+                    document.querySelector('#installBanner').classList.add('hide');
+                    giftr.defferedPrompt = null;
+                    giftr.acceptedInstall = false;
+                }
+            })
         }
     }
 };

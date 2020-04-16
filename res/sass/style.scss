@@ -18,6 +18,14 @@ h1,h2,h3,h4,h5,h6{
 //     font-size: 18px; //
 // }
 
+//css based on google workbox pwa course:
+.banner{
+    display: flex;
+    align-content: center;
+    // display: flex;
+    justify-self: center;
+    width: 100%;
+}
 //materailize overrides
 
 .preloader-wrapper{
@@ -39,4 +47,15 @@ h1,h2,h3,h4,h5,h6{
     max-height: 20px;
     top: 4px;
     @include center(row);
+}
+
+//sticky footer taken from here: https://materializecss.com/footer.html
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
