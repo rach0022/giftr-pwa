@@ -113,7 +113,7 @@ export const giftList = {
                 //set the classes and attributes
                 item.querySelector('.collection-item').setAttribute('data-giftid', gift._id);
                 del_btn.setAttribute('data-giftid', gift._id);
-                link.href = ui.addProtocol(gift.store.productUrl);
+                if(gift.store.productUrl) link.href = ui.addProtocol(gift.store.productUrl);
 
                 //set the content
                 item.querySelector('.title').textContent = gift.name
