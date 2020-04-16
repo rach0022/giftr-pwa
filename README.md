@@ -2,7 +2,7 @@
 ### https://prof3ssorst3v3.github.io/mad9022/assignments/assign2.html
 
 ### To Do: 
-- [ ] create icon for web app | have test icon, need to make a better one now
+- [x] create icon for web app | have test icon, need to make a better one now
 - [x] draw out some paper prototype ideas for this applicationa and decide on which componenets I need to use from materailize
 - [x] create x-icon for desktop version | copied from assignment 1
 - [x] link materialize library (self hosted for offline use)
@@ -44,7 +44,7 @@
 - [x] Create a manifest.json that links to all icons made
 - [x] Create a service worker (sw.js) with a global scope and register it in one of the main modules (main.js/ app.js) || HAVE BUGS
 - [x] Allow a service worker to cache requests and display them to the user when offline
-- [ ] Manage the install process of a pwa by following: https://prof3ssorst3v3.github.io/mad9022/modules/week11/install.html
+- [x] Manage the install process of a pwa by following: https://prof3ssorst3v3.github.io/mad9022/modules/week11/install.html
 - [ ] BONUS: you can earn a bonus 5% if you use IndexedDB and the idb-keyval library to save requests for Deleting existing people and gifts or Adding new people or gifts when the user is offline. (https://www.npmjs.com/package/idb-keyval)
 - [ ] BONUS: You can earn another 5% if you are able to take any data out of IndexedDB and send it to the API when the the network connection is re-established.
 
@@ -66,5 +66,5 @@
 - [x] user can see other users cached data: solution: delete dynamic cache by telling service worker to do that
 - [x] user cannot see updated data :  use an online first then cache strategy for giving back files from service worker
 - [ ] using a cache first strategy causes the dynamic cache to double cache, should I try and fix this or just let this be, also should i stop limiting the dynamic cache size because it will always be empty when the user logs in
-- [ ] icons are 1px x 1px bigger then specified, maybe it was becuase i included the bleed. I planned on remaking them so just dont include the bleed next time and also choose some colours and fonts while you are at it
+- [x] icons are 1px x 1px bigger then specified, maybe it was becuase i included the bleed. I planned on remaking them so just dont include the bleed next time and also choose some colours and fonts while you are at it || removed bleed, didnt have time to choose colours
 - [x] auding failing: Does not provide fallback content when JavaScript is not available | solution : find a way to add some html to the body when the page loads by is cleared when the app loads. probs in app.js || WOO can pass the audit!!!
