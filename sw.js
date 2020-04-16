@@ -1,5 +1,5 @@
 'use strict';
-const staticCacheName = 'static-cache-v35';
+const staticCacheName = 'static-cache-v47';
 const dynamicCacheName = 'dynamic-cache-v10';
 const dynamicCacheSize = 50;
 const staticAssets = [
@@ -34,6 +34,7 @@ const staticAssets = [
     '/manifest.json'
 ];
 let baseURL = null;
+let isOnline = true;
 
 //listen for service worker events
 self.addEventListener('install', onInstall); //install event for service worker
@@ -106,7 +107,7 @@ function onFetch(ev){
         //if we get a cacheRes give that back or do the normal fetch
         //if fetch fails then just go to our offline handler fallback in the catch
         caches.match(ev.request.url).then(cacheRes =>{
-            console.log(cacheRes);
+            // console.log(cacheRes);
             return cacheRes || fetch(ev.request).then(fetchRes =>{
                 //if it wasnt in our cache and we didnt get a 404 status code open up the dynamic cache
                 console.log(ev.request, 'was not in cache');
@@ -114,9 +115,10 @@ function onFetch(ev){
                     return caches.open(dynamicCacheName).then(cache =>{
                         //cache the request if it does not come from our api
                         //or it comes from our API and uses get
-                        if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1){
+                        if(ev.request.url.indexOf('giftr.mad9124.rocks/') == -1 ||(
+                            ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')){
                             //currently only cahcing if it doesnt come from our api add the following to the if statement to allow cached GETS
-                            //(ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')
+                            // ||(ev.request.url.indexOf('giftr.mad9124.rocks/api/people') > -1 && ev.request.method == 'GET')
                             console.log('adding to dynamic cache', ev.request.url, fetchRes.clone());
                             cache.put(ev.request.url, fetchRes.clone()); //cloning the response to still send it back to browser
                             limitCacheSize(dynamicCacheName, dynamicCacheSize);
@@ -175,7 +177,15 @@ function onMessage({ data }) {
     //received a message from the webpage
     //probably just updating our online status
     if ('statusUpdate' in data) {
-        console.log(`Service Worker receiving message ${data}`);
+        if(data.hasOwnProperty("isLoggedIn")){ //message about logged in status
+            console.log(`Service Worker receiving message about login status: ${data.isLoggedIn}`);
+            //if we arent logged in then delete the dynamic cache
+            if(!data.isLoggedIn) limitCacheSize(dynamicCacheName, 0);
+        } else if(data.hasOwnProperty('isOnline')){ //message about online or offline
+            isOnline = data.isOnline;
+            console.log('Network status', data.isOnline);
+        }
+        
     }
     if ('baseURL' in data) {
         baseURL = data.baseURL;

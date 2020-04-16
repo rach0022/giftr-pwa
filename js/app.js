@@ -10,6 +10,7 @@
 'use strict';
 import {pubsub} from './pubsub.js';
 import {ui} from './ui.js';
+import {giftrRequests} from './requests.js';
 import {nav} from './nav.js';
 import {signInForm} from './forms/signIn.js';
 import {signUpForm} from './forms/signUp.js';
@@ -32,9 +33,10 @@ let giftr = {
                 //tell the modules if user is logged in or not
                 if(token) {
                     pubsub.publish('loginStatus', true); //tell the other modules if the user is logged in
-                    giftr.sendMessage({"statusUpdate":'isLoggedIn'});
+                    giftr.sendMessage({"statusUpdate": true, "isLoggedIn": true});
                 } else {
                     pubsub.publish('loginStatus', false); //tell the other modules if the user is not logged in
+                    giftr.sendMessage({"statusUpdate": true, "isLoggedIn": false});
                 }
             }).catch(console.error);
         }
@@ -61,6 +63,10 @@ let giftr = {
         }
         ui.initModal('errorModal'); //init the error modal
 
+        //add any listeners that we need
+        window.addEventListener('online', giftr.networkStatusChange);
+        window.addEventListener('offline', giftr.networkStatusChange);
+
         
     },
 
@@ -82,6 +88,8 @@ let giftr = {
         });
         navigator.serviceWorker.addEventListener('message', giftr.onMessage, false);
     },
+
+    // call back function when we get a function from the service worker
     onMessage: (ev) => {
         //message from SW received
         let { data } = ev;
@@ -92,6 +100,35 @@ let giftr = {
         //msg is a JS Object
         //tell SW that we are online or offline
         giftr.sw.postMessage(msg);
+    },
+
+    //following: https://stackoverflow.com/questions/44756154/progressive-web-app-how-to-detect-and-handle-when-connection-is-up-again
+    //this is a callback function to tell the service worker if we are online or offline that way when we
+    //make request to our api we will go network first to fetch those otherwise we will fallback to our cache if we are offline
+    networkStatusChange: ev =>{
+        //check the navigator object if we are online
+        //warning this will say online even if connected to router
+        //so we need to fetch so url and see if we are online lets go for the 
+        //healthStatusCheck of the giftr.mad9124.rocks api
+        if (navigator.onLine){
+            //we might be online
+            let req = giftrRequests.send('GET', '/', null, false, false);
+            if(req){
+                fetch(req)
+                    .then(res =>{
+                        //check if the response has an error or data
+                        if(res.errors){
+                            giftr.sendMessage({"statusUpdate": true, "isOnline": false});
+                        } else if(res.ok) {
+                            giftr.sendMessage({"statusUpdate": true, "isOnline": true}); //we are not online
+                        }
+                        console.log("HEALTH STATUS RESPONSE", res);
+                    }).catch(console.warn);
+            }
+        } else {
+            //we definitely arent online
+            giftr.sendMessage({"statusUpdate": true, "isOnline": false});
+        }
     }
 };
 
