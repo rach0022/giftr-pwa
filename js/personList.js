@@ -117,8 +117,8 @@ export const personList = {
 
                 //set the content
                 item.querySelector('.title').textContent = person.name;
-                if(person.imageURL){
-                    item.querySelector('img').src = person.imageURL;
+                if(person.imageUrl){
+                    item.querySelector('img').src = person.imageUrl;
                 } else {
                     item.querySelector('img').src = personList.defaultImageSrc;
                 }
