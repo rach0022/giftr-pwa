@@ -7,6 +7,7 @@
 - [x] create x-icon for desktop version | copied from assignment 1
 - [x] link materialize library (self hosted for offline use)
 - [ ] decide on a colour scheme (add class to body based on colour scheme)
+- [ ] choose some google fonts to host on site, maybe even add them to the static/ dynamic cache
 - [x] decide on design practice (pubsub, seems like the best option so far)
 - [x] create some base materialize templates to use
 - [x] figure out form validation with materialize forms
@@ -63,3 +64,4 @@
 - [x] user can see other users cached data: solution: delete dynamic cache by telling service worker to do that
 - [x] user cannot see updated data :  use an online first then cache strategy for giving back files from service worker
 - [ ] using a cache first strategy causes the dynamic cache to double cache, should I try and fix this or just let this be, also should i stop limiting the dynamic cache size because it will always be empty when the user logs in
+- [ ] icons are 1px x 1px bigger then specified, maybe it was becuase i included the bleed. I planned on remaking them so just dont include the bleed next time and also choose some colours and fonts while you are at it
